@@ -24,7 +24,7 @@ export const IMAGES: PomImage[] = [
   },
   {
     id: 3,
-    src: u("photo-1600607687644-c7171b42498b", 1800),
+    src: u("photo-1600573472550-8090b5e0745e", 1800),
     alt: "Pom PentHouse bedroom with linen bedding and lake light",
     effect: "Crossfade",
   },
