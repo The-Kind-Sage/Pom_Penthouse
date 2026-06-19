@@ -39,7 +39,7 @@ export function Hero() {
             alt={s.alt}
             loading="eager"
             decoding="async"
-            className={`object-cover w-full h-full ${idx === 1 ? "kenburns" : ""}`}
+            className="object-cover w-full h-full"
           />
         </motion.div>
       ))}
