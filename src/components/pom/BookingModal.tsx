@@ -5,7 +5,7 @@ import "react-day-picker/style.css";
 import { X, Plus, Minus } from "lucide-react";
 import { toast } from "sonner";
 import { ui, useUI } from "@/lib/ui-store";
-import { ROOMS, ADDONS, calcPrice, type RoomKey, type AddonKey } from "@/lib/pricing";
+import { ROOMS, ADDONS, calcPrice, fmtNPR, type RoomKey, type AddonKey } from "@/lib/pricing";
 import { photo } from "@/lib/images";
 
 function differenceInDays(a: Date, b: Date) {
@@ -155,7 +155,7 @@ export function BookingModal() {
     resetAll();
   };
 
-  const fmtUSD = (n: number) => `$${n.toLocaleString()}`;
+
 
   return (
     <AnimatePresence>
@@ -204,7 +204,7 @@ export function BookingModal() {
                 <div className="mt-4 p-5 rounded-xl" style={{ background: "var(--sand-soft)" }}>
                   <p className="text-sm opacity-70">Pom PentHouse — Entire Place</p>
                   <p className="font-display text-3xl mt-1">
-                    $189 <span className="text-base opacity-60">/ night</span>
+                    रू 25,500 <span className="text-base opacity-60">/ night</span>
                   </p>
                   <p className="text-xs mt-1 opacity-70">★ 4.97 · 42 reviews</p>
                 </div>
@@ -345,32 +345,32 @@ export function BookingModal() {
                   <div className="flex justify-between">
                     <span>
                       {price.isLong
-                        ? `$${ROOMS.long.rate.toLocaleString()} × ${price.units} month`
-                        : `$${ROOMS[room].rate} × ${price.units} nights`}
+                        ? `रू ${ROOMS.long.rate.toLocaleString("en-IN")} × ${price.units} month`
+                        : `रू ${ROOMS[room].rate.toLocaleString("en-IN")} × ${price.units} nights`}
                     </span>
-                    <span>{fmtUSD(price.base)}</span>
+                    <span>{fmtNPR(price.base)}</span>
                   </div>
                   {!price.isLong && (
                     <div className="flex justify-between mt-1">
                       <span>Cleaning fee</span>
-                      <span>{fmtUSD(price.cleaningFee)}</span>
+                      <span>{fmtNPR(price.cleaningFee)}</span>
                     </div>
                   )}
                   <div className="flex justify-between mt-1">
                     <span>Add-ons</span>
-                    <span>{fmtUSD(price.addonsTotal)}</span>
+                    <span>{fmtNPR(price.addonsTotal)}</span>
                   </div>
                   <div className="flex justify-between mt-1 opacity-70">
                     <span>Subtotal</span>
-                    <span>{fmtUSD(price.subtotal)}</span>
+                    <span>{fmtNPR(price.subtotal)}</span>
                   </div>
                   <div className="flex justify-between mt-1">
                     <span>Service fee 8%</span>
-                    <span>{fmtUSD(price.serviceFee)}</span>
+                    <span>{fmtNPR(price.serviceFee)}</span>
                   </div>
                   <div className="border-t mt-3 pt-3 flex justify-between font-medium text-base">
-                    <span>Total USD</span>
-                    <span>{fmtUSD(price.total)}</span>
+                    <span>Total NPR</span>
+                    <span>{fmtNPR(price.total)}</span>
                   </div>
                   <p className="mt-2 text-xs opacity-60">Taxes included. No hidden fees.</p>
                 </div>
@@ -419,11 +419,11 @@ export function BookingModal() {
                 </fieldset>
 
                 <button type="submit" className="btn-primary w-full justify-center">
-                  Request to Book — Total {fmtUSD(price.total)}
+                  Request to Book — Total {fmtNPR(price.total)}
                 </button>
                 <p className="text-xs opacity-60 text-center">You won't be charged yet</p>
                 <p className="text-xs opacity-60 text-center">
-                  $50k purchase inquiries: hello@pompenthouse.np · Free cancellation 48h prior ·
+                  रू 67.5L purchase inquiries: hello@pompenthouse.np · Free cancellation 48h prior ·
                   Check-in 3PM / Check-out 11AM
                 </p>
               </form>

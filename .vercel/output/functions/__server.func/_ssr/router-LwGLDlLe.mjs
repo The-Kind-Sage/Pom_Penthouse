@@ -3,7 +3,7 @@ import { a as require_jsx_runtime, o as require_react } from "../_libs/@radix-ui
 import { A as redirect, c as HeadContent, d as createRouter, f as Outlet, g as Link, h as createRootRouteWithContext, m as createFileRoute, p as lazyRouteComponent, s as Scripts, v as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-C_mei_lu.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-LwGLDlLe.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var styles_default = "/assets/styles-laqxiwve.css";
@@ -185,14 +185,14 @@ var Route$8 = createFileRoute("/admin")({
 		if (!localStorage.getItem("pom-admin-auth")) throw redirect({ to: "/admin/login" });
 	}
 });
-var $$splitComponentImporter$7 = () => import("./routes-DgkqjfV4.mjs");
+var $$splitComponentImporter$7 = () => import("./routes-BP03hiSe.mjs");
 var Route$7 = createFileRoute("/")({
 	head: () => ({
 		meta: [
 			{ title: "Pom PentHouse — Lakeside Sanctuary, Pokhara, Nepal" },
 			{
 				name: "description",
-				content: "A luxury penthouse 180m from Phewa Lake, Pokhara. 3 beds, Annapurna views. Book a stay from $189/night."
+				content: "A luxury penthouse 180m from Phewa Lake, Pokhara. 3 beds, Annapurna views. Book a stay from रू25,500/night."
 			},
 			{
 				property: "og:title",
@@ -230,17 +230,17 @@ var Route$7 = createFileRoute("/")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./admin.index-CbxeKcNI.mjs");
+var $$splitComponentImporter$6 = () => import("./admin.index-DGhvhqdg.mjs");
 var Route$6 = createFileRoute("/admin/")({ component: lazyRouteComponent($$splitComponentImporter$6, "component") });
-var $$splitComponentImporter$5 = () => import("./admin.users-ayf5YwqV.mjs");
+var $$splitComponentImporter$5 = () => import("./admin.users-D2JvFWF4.mjs");
 var Route$5 = createFileRoute("/admin/users")({ component: lazyRouteComponent($$splitComponentImporter$5, "component") });
 var $$splitComponentImporter$4 = () => import("./admin.settings-BzZiOHRA.mjs");
 var Route$4 = createFileRoute("/admin/settings")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
-var $$splitComponentImporter$3 = () => import("./admin.penthouses-D7gW4HIg.mjs");
+var $$splitComponentImporter$3 = () => import("./admin.penthouses-BG2dC0Qb.mjs");
 var Route$3 = createFileRoute("/admin/penthouses")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
 var $$splitComponentImporter$2 = () => import("./admin.login-DUYOIojn.mjs");
 var Route$2 = createFileRoute("/admin/login")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
-var $$splitComponentImporter$1 = () => import("./admin.bookings-GYh2DuVQ.mjs");
+var $$splitComponentImporter$1 = () => import("./admin.bookings-CXHU3A7H.mjs");
 var Route$1 = createFileRoute("/admin/bookings")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
 var $$splitComponentImporter = () => import("./admin.analytics-qLibFFcT.mjs");
 var Route = createFileRoute("/admin/analytics")({ component: lazyRouteComponent($$splitComponentImporter, "component") });

@@ -1,11 +1,11 @@
 import { a as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { C as DollarSign, _ as MessageCircle, f as Percent, k as CalendarCheck } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin.index-CbxeKcNI.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin.index-DGhvhqdg.js
 var import_jsx_runtime = require_jsx_runtime();
 var metrics = [
 	{
 		label: "Total Revenue",
-		value: "$0",
+		value: "रू0",
 		trend: "Awaiting data",
 		up: true,
 		icon: DollarSign,

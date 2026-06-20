@@ -4,7 +4,7 @@ import { E as ChevronLeft, M as ArrowUp, T as ChevronRight, c as Sparkles, d as 
 import { n as toast, t as Toaster } from "../_libs/sonner.mjs";
 import { a as useScroll, i as useMotionValue, n as useSpring, o as motion, r as useTransform, s as AnimatePresence, t as useInView } from "../_libs/framer-motion.mjs";
 import { t as DayPicker } from "../_libs/react-day-picker.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DgkqjfV4.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BP03hiSe.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var state = {
@@ -1208,7 +1208,7 @@ function Residence() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							onClick: ui.openBooking,
 							className: "btn-primary mt-4 text-sm py-2 px-5",
-							children: "Book Now — $110 / night"
+							children: "Book Now — रू14,850 / night"
 						})
 					]
 				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SplitScreen, { p: photo(18) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -1229,7 +1229,7 @@ function Residence() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							onClick: ui.openBooking,
 							className: "btn-primary mt-4 text-sm py-2 px-5",
-							children: "Book Now — $189 / night"
+							children: "Book Now — रू25,500 / night"
 						})
 					]
 				})] })]
@@ -1255,19 +1255,19 @@ function Residence() {
 var ROOMS = {
 	entire: {
 		label: "Entire Penthouse",
-		rate: 189,
+		rate: 25500,
 		unit: "night",
 		blurb: "Full 3-bed penthouse"
 	},
 	suite: {
 		label: "Master Suite Only",
-		rate: 110,
+		rate: 14850,
 		unit: "night",
 		blurb: "King bed + private bath"
 	},
 	long: {
 		label: "Long Stay",
-		rate: 3900,
+		rate: 525e3,
 		unit: "month",
 		blurb: "30 days+ · best for remote work"
 	}
@@ -1276,34 +1276,38 @@ var ADDONS = [
 	{
 		key: "airport",
 		label: "Airport Pickup",
-		price: 25,
+		price: 3500,
 		perNight: false
 	},
 	{
 		key: "chef",
 		label: "Private Chef (1 evening)",
-		price: 60,
+		price: 8e3,
 		perNight: false
 	},
 	{
 		key: "cleaning",
 		label: "Daily Cleaning",
-		price: 15,
+		price: 2e3,
 		perNight: true
 	},
 	{
 		key: "trek",
 		label: "Trek Guide Day",
-		price: 45,
+		price: 6e3,
 		perNight: false
 	}
 ];
+var CLEANING_FEE = 6e3;
+function fmtNPR(n) {
+	return `रू ${n.toLocaleString("en-IN")}`;
+}
 function calcPrice(opts) {
 	const room = ROOMS[opts.room];
 	const isLong = opts.room === "long";
 	const units = isLong ? Math.max(1, Math.ceil(opts.nights / 30)) : opts.nights;
 	const base = room.rate * units;
-	const cleaningFee = isLong ? 0 : 45;
+	const cleaningFee = isLong ? 0 : CLEANING_FEE;
 	const serviceFeeRate = .08;
 	const addonsTotal = ADDONS.reduce((sum, a) => {
 		if (!opts.addons[a.key]) return sum;
@@ -1391,7 +1395,6 @@ function BookingSection() {
 		nights: room === "long" ? 30 : nights,
 		addons
 	});
-	const fmtUSD = (n) => `$${n.toLocaleString()}`;
 	const handleBook = (e) => {
 		e.preventDefault();
 		if (!name.trim() || !email.trim()) return;
@@ -1589,19 +1592,19 @@ function BookingSection() {
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Base" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.base) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Base" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.base) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between mt-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Add-ons" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.addonsTotal) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Add-ons" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.addonsTotal) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between mt-1 opacity-70",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Fees & service" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.serviceFee + price.cleaningFee) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Fees & service" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.serviceFee + price.cleaningFee) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "border-t mt-2 pt-2 flex justify-between font-medium text-base",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Total USD" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.total) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Total NPR" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.total) })]
 								})
 							]
 						}),
@@ -1628,7 +1631,7 @@ function BookingSection() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 							type: "submit",
 							className: "btn-primary w-full justify-center text-sm",
-							children: ["Continue Booking — ", fmtUSD(price.total)]
+							children: ["Continue Booking — ", fmtNPR(price.total)]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "text-xs opacity-60 text-center",
@@ -1813,7 +1816,7 @@ function Offer() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-6 text-sm opacity-60 accent-italic",
-						children: "Prefer to try before you buy? Book a stay from $189/night."
+						children: "Prefer to try before you buy? Book a stay from रू25,500/night."
 					})
 				]
 			})
@@ -1835,7 +1838,7 @@ var faqs = [
 	},
 	{
 		q: "Airport transfer?",
-		a: "Yes, $25 add-on at booking. 25 minutes from PKR."
+		a: "Yes, रू3,500 add-on at booking. 25 minutes from PKR."
 	},
 	{
 		q: "Is the penthouse furnished?",
@@ -2164,7 +2167,6 @@ function BookingModal() {
 		ui.closeBooking();
 		resetAll();
 	};
-	const fmtUSD = (n) => `$${n.toLocaleString()}`;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: bookingOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 		className: "fixed inset-0 z-[90] flex items-center justify-center p-2 md:p-6",
 		style: {
@@ -2230,7 +2232,7 @@ function BookingModal() {
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 									className: "font-display text-3xl mt-1",
-									children: ["$189 ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									children: ["रू 25,500 ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "text-base opacity-60",
 										children: "/ night"
 									})]
@@ -2405,27 +2407,27 @@ function BookingModal() {
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: price.isLong ? `$${ROOMS.long.rate.toLocaleString()} × ${price.units} month` : `$${ROOMS[room].rate} × ${price.units} nights` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.base) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: price.isLong ? `रू ${ROOMS.long.rate.toLocaleString("en-IN")} × ${price.units} month` : `रू ${ROOMS[room].rate.toLocaleString("en-IN")} × ${price.units} nights` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.base) })]
 								}),
 								!price.isLong && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between mt-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Cleaning fee" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.cleaningFee) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Cleaning fee" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.cleaningFee) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between mt-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Add-ons" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.addonsTotal) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Add-ons" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.addonsTotal) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between mt-1 opacity-70",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Subtotal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.subtotal) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Subtotal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.subtotal) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between mt-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Service fee 8%" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.serviceFee) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Service fee 8%" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.serviceFee) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "border-t mt-3 pt-3 flex justify-between font-medium text-base",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Total USD" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtUSD(price.total) })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Total NPR" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: fmtNPR(price.total) })]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "mt-2 text-xs opacity-60",
@@ -2495,7 +2497,7 @@ function BookingModal() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 							type: "submit",
 							className: "btn-primary w-full justify-center",
-							children: ["Request to Book — Total ", fmtUSD(price.total)]
+							children: ["Request to Book — Total ", fmtNPR(price.total)]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "text-xs opacity-60 text-center",
@@ -2503,7 +2505,7 @@ function BookingModal() {
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "text-xs opacity-60 text-center",
-							children: "$50k purchase inquiries: hello@pompenthouse.np · Free cancellation 48h prior · Check-in 3PM / Check-out 11AM"
+							children: "रू 67.5L purchase inquiries: hello@pompenthouse.np · Free cancellation 48h prior · Check-in 3PM / Check-out 11AM"
 						})
 					]
 				})]

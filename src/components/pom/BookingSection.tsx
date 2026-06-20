@@ -4,7 +4,7 @@ import "react-day-picker/style.css";
 import { motion } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { ui } from "@/lib/ui-store";
-import { ROOMS, ADDONS, calcPrice, type RoomKey, type AddonKey } from "@/lib/pricing";
+import { ROOMS, ADDONS, calcPrice, fmtNPR, type RoomKey, type AddonKey } from "@/lib/pricing";
 import { photo } from "@/lib/images";
 
 function differenceInDays(a: Date, b: Date) {
@@ -94,7 +94,7 @@ export function BookingSection() {
 
   const nights = range?.from && range?.to ? Math.max(0, differenceInDays(range.to, range.from)) : 0;
   const price = calcPrice({ room, nights: room === "long" ? 30 : nights, addons });
-  const fmtUSD = (n: number) => `$${n.toLocaleString()}`;
+
 
   const handleBook = (e: React.FormEvent) => {
     e.preventDefault();
@@ -233,19 +233,19 @@ export function BookingSection() {
             <div className="rounded-xl p-4 text-sm" style={{ background: "var(--sand-soft)" }}>
               <div className="flex justify-between">
                 <span>Base</span>
-                <span>{fmtUSD(price.base)}</span>
+                <span>{fmtNPR(price.base)}</span>
               </div>
               <div className="flex justify-between mt-1">
                 <span>Add-ons</span>
-                <span>{fmtUSD(price.addonsTotal)}</span>
+                <span>{fmtNPR(price.addonsTotal)}</span>
               </div>
               <div className="flex justify-between mt-1 opacity-70">
                 <span>Fees & service</span>
-                <span>{fmtUSD(price.serviceFee + price.cleaningFee)}</span>
+                <span>{fmtNPR(price.serviceFee + price.cleaningFee)}</span>
               </div>
               <div className="border-t mt-2 pt-2 flex justify-between font-medium text-base">
-                <span>Total USD</span>
-                <span>{fmtUSD(price.total)}</span>
+                <span>Total NPR</span>
+                <span>{fmtNPR(price.total)}</span>
               </div>
             </div>
 
@@ -272,7 +272,7 @@ export function BookingSection() {
             </fieldset>
 
             <button type="submit" className="btn-primary w-full justify-center text-sm">
-              Continue Booking — {fmtUSD(price.total)}
+              Continue Booking — {fmtNPR(price.total)}
             </button>
             <p className="text-xs opacity-60 text-center">You won't be charged yet</p>
           </motion.form>

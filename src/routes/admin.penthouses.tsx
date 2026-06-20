@@ -88,7 +88,7 @@ function PenthousesPage() {
                   </td>
                   <td className="px-4 py-3 font-medium">{p.name}</td>
                   <td className="px-4 py-3 text-foreground/60">{p.location}</td>
-                  <td className="px-4 py-3">${p.pricePerNight}</td>
+                  <td className="px-4 py-3">रू{p.pricePerNight.toLocaleString("en-IN")}</td>
                   <td className="px-4 py-3"><Badge label={p.status} style={statusStyles[p.status]} /></td>
                   <td className="px-4 py-3">{p.maxGuests}</td>
                   <td className="px-4 py-3">

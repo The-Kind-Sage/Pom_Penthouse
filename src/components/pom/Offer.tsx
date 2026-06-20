@@ -39,7 +39,7 @@ export function Offer() {
           </a>
         </div>
         <p className="mt-6 text-sm opacity-60 accent-italic">
-          Prefer to try before you buy? Book a stay from $189/night.
+          Prefer to try before you buy? Book a stay from रू25,500/night.
         </p>
       </div>
     </section>

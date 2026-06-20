@@ -2,7 +2,7 @@ import { o as __toESM } from "../_runtime.mjs";
 import { a as require_jsx_runtime, o as require_react } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { u as Search } from "../_libs/lucide-react.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin.users-ayf5YwqV.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin.users-D2JvFWF4.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var roleStyles = {
@@ -138,7 +138,7 @@ function UsersPage() {
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("td", {
 										className: "px-4 py-3",
-										children: ["$", u.lifetimeSpend.toLocaleString()]
+										children: ["रू", u.lifetimeSpend.toLocaleString("en-IN")]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
 										className: "px-4 py-3",

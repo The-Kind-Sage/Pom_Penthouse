@@ -108,7 +108,7 @@ function BookingsPage() {
                   <td className="px-4 py-3">{b.penthouseName}</td>
                   <td className="px-4 py-3">{b.checkIn}</td>
                   <td className="px-4 py-3">{b.checkOut}</td>
-                  <td className="px-4 py-3">${b.total}</td>
+                  <td className="px-4 py-3">रू{b.total.toLocaleString("en-IN")}</td>
                   <td className="px-4 py-3"><Badge label={b.status} style={statusStyles[b.status]} /></td>
                   <td className="px-4 py-3"><Badge label={b.paymentStatus} style={paymentStyles[b.paymentStatus]} /></td>
                   <td className="px-4 py-3">
@@ -153,7 +153,7 @@ function BookingsPage() {
                 <div className="flex justify-between"><span className="text-foreground/60">Check-out</span><span>{selectedBooking.checkOut}</span></div>
                 <div className="flex justify-between"><span className="text-foreground/60">Nights</span><span>{selectedBooking.nights}</span></div>
                 <div className="flex justify-between"><span className="text-foreground/60">Guests</span><span>{selectedBooking.guests}</span></div>
-                <div className="flex justify-between font-medium border-t pt-2 mt-2"><span>Total</span><span>${selectedBooking.total}</span></div>
+                <div className="flex justify-between font-medium border-t pt-2 mt-2"><span>Total</span><span>रू{selectedBooking.total.toLocaleString("en-IN")}</span></div>
               </div>
               <div className="flex gap-2 mt-4">
                 {selectedBooking.status === "pending" && (

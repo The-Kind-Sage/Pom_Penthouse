@@ -100,7 +100,7 @@ export function Residence() {
                 King linen bed. Lake-facing glass. Limestone soaking bath. Walk-in cedar closet.
               </p>
               <button onClick={ui.openBooking} className="btn-primary mt-4 text-sm py-2 px-5">
-                Book Now — $110 / night
+                Book Now — रू14,850 / night
               </button>
             </div>
           </div>
@@ -114,7 +114,7 @@ export function Residence() {
                 Hover to see night. Low oak sofa. Hand-thrown ceramics. Vinyl.
               </p>
               <button onClick={ui.openBooking} className="btn-primary mt-4 text-sm py-2 px-5">
-                Book Now — $189 / night
+                Book Now — रू25,500 / night
               </button>
             </div>
           </div>

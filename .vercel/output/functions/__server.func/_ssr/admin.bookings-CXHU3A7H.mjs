@@ -2,7 +2,7 @@ import { o as __toESM } from "../_runtime.mjs";
 import { a as require_jsx_runtime, o as require_react } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { D as Check, S as Download, t as X, u as Search, x as Eye } from "../_libs/lucide-react.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin.bookings-GYh2DuVQ.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin.bookings-CXHU3A7H.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var statusStyles = {
@@ -188,7 +188,7 @@ function BookingsPage() {
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("td", {
 										className: "px-4 py-3",
-										children: ["$", b.total]
+										children: ["रू", b.total.toLocaleString("en-IN")]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
 										className: "px-4 py-3",
@@ -306,7 +306,7 @@ function BookingsPage() {
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex justify-between font-medium border-t pt-2 mt-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Total" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["$", selectedBooking.total] })]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Total" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["रू", selectedBooking.total.toLocaleString("en-IN")] })]
 								})
 							]
 						}),

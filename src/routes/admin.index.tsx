@@ -7,7 +7,7 @@ export const Route = createFileRoute("/admin/")({
 });
 
 const metrics = [
-  { label: "Total Revenue", value: "$0", trend: "Awaiting data", up: true, icon: DollarSign, color: "text-emerald-500" },
+  { label: "Total Revenue", value: "रू0", trend: "Awaiting data", up: true, icon: DollarSign, color: "text-emerald-500" },
   { label: "Active Bookings", value: "0", trend: "No active bookings", up: true, icon: CalendarCheck, color: "text-blue-500" },
   { label: "Occupancy Rate", value: "--", trend: "Insufficient data", up: true, icon: Percent, color: "text-amber-500" },
   { label: "Pending Inquiries", value: "0", trend: "No inquiries", up: false, icon: MessageCircle, color: "text-rose-500" },
