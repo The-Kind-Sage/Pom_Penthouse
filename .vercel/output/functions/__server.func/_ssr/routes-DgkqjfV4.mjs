@@ -1,10 +1,10 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
+import { a as require_jsx_runtime, o as require_react } from "../_libs/@radix-ui/react-collection+[...].mjs";
+import { D as ChevronRight, E as Cpu, N as Bell, O as ChevronLeft, P as ArrowUp, _ as Moon, b as Menu, c as Sunrise, g as Mountain, l as Sun, p as Plus, t as X, u as Sparkles, v as Minus } from "../_libs/lucide-react.mjs";
 import { n as toast, t as Toaster } from "../_libs/sonner.mjs";
-import { a as Plus, c as Minus, d as ChevronRight, f as ChevronLeft, i as Sparkles, l as Menu, m as ArrowUp, n as Sunrise, o as Mountain, p as Bell, r as Sun, s as Moon, t as X, u as Cpu } from "../_libs/lucide-react.mjs";
 import { a as useScroll, i as useMotionValue, n as useSpring, o as motion, r as useTransform, s as AnimatePresence, t as useInView } from "../_libs/framer-motion.mjs";
 import { t as DayPicker } from "../_libs/react-day-picker.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DLgFEdfM.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DgkqjfV4.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var state = {
@@ -169,7 +169,7 @@ function Navbar() {
 				children: [links.map((l, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 					href: l.href,
 					onClick: () => setOpen(false),
-					className: "font-display text-4xl animate-[fade-in_0.5s_ease-out_both]",
+					className: "font-display text-3xl md:text-4xl animate-[fade-in_0.5s_ease-out_both]",
 					style: { animationDelay: `${i * .05}s` },
 					children: l.label
 				}, l.href)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
@@ -200,7 +200,7 @@ var IMAGES = [
 	},
 	{
 		id: 3,
-		src: u("photo-1600607687644-c7171b42498b", 1800),
+		src: u("photo-1600573472550-8090b5e0745e", 1800),
 		alt: "Pom PentHouse bedroom with linen bedding and lake light",
 		effect: "Crossfade"
 	},
@@ -346,7 +346,7 @@ function Hero() {
 					alt: s.alt,
 					loading: "eager",
 					decoding: "async",
-					className: `object-cover w-full h-full ${idx === 1 ? "kenburns" : ""}`
+					className: "object-cover w-full h-full"
 				})
 			}, s.id + "-" + idx)),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/25" }),
@@ -390,7 +390,7 @@ function Hero() {
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "mt-6 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--gold)]/60 backdrop-blur bg-white/10 text-sm",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1.5 h-1.5 rounded-full bg-[var(--gold)]" }), "$50,000 USD · Freehold"]
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1.5 h-1.5 rounded-full bg-[var(--gold)]" }), "Freehold"]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "mt-8 flex flex-wrap gap-3",
@@ -510,7 +510,7 @@ function About() {
 							alt: p4.alt,
 							loading: "lazy",
 							decoding: "async",
-							className: "object-cover w-full h-[420px]",
+							className: "object-cover w-full h-[260px] sm:h-[320px] md:h-[420px]",
 							initial: {
 								x: 80,
 								scale: .96,
@@ -568,7 +568,7 @@ function About() {
 								alt: p5.alt,
 								loading: "lazy",
 								decoding: "async",
-								className: "object-cover w-full h-[420px]",
+								className: "object-cover w-full h-[260px] sm:h-[320px] md:h-[420px]",
 								style: { clipPath: "url(#circle-mask)" }
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("figcaption", {
@@ -600,7 +600,7 @@ function About() {
 								alt: p6.alt,
 								loading: "lazy",
 								decoding: "async",
-								className: "object-cover w-full h-[420px]",
+								className: "object-cover w-full h-[260px] sm:h-[320px] md:h-[420px]",
 								style: { filter: "url(#liquid-distort)" }
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("figcaption", {
@@ -771,8 +771,8 @@ function CubeFlip({ src, alt, back }) {
 					decoding: "async",
 					className: "object-cover w-full h-full"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "absolute top-3 right-3 text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-black/50 text-white",
-					children: "Click to flip"
+					className: "absolute top-3 right-3 text-[11px] md:text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-black/50 text-white",
+					children: "Tap to flip"
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "absolute inset-0 flex items-center justify-center bg-[var(--charcoal)] text-[var(--sand)]",
@@ -820,7 +820,7 @@ function Gallery() {
 				src: p7.src,
 				alt: p7.alt
 			}),
-			cls: "md:row-span-2 h-[460px] md:h-full",
+			cls: "md:row-span-2 min-h-[220px] md:min-h-0 md:h-full",
 			idx: 6,
 			label: "Living Room"
 		},
@@ -830,7 +830,7 @@ function Gallery() {
 				src: p8.src,
 				alt: p8.alt
 			}),
-			cls: "h-[300px]",
+			cls: "min-h-[200px] md:h-[300px]",
 			idx: 7,
 			label: "Kitchen"
 		},
@@ -840,7 +840,7 @@ function Gallery() {
 				src: p9.src,
 				alt: p9.alt
 			}),
-			cls: "h-[300px]",
+			cls: "min-h-[200px] md:h-[300px]",
 			idx: 8,
 			label: "Lounge"
 		},
@@ -850,7 +850,7 @@ function Gallery() {
 				src: p10.src,
 				alt: p10.alt
 			}),
-			cls: "h-[460px] lg:row-span-2",
+			cls: "min-h-[220px] md:h-[460px] lg:row-span-2",
 			idx: 9,
 			label: "Bedroom"
 		},
@@ -861,7 +861,7 @@ function Gallery() {
 				alt: p11.alt,
 				back: p2.src
 			}),
-			cls: "h-[300px]",
+			cls: "min-h-[200px] md:h-[300px]",
 			idx: 10,
 			label: "Terrace"
 		},
@@ -871,7 +871,7 @@ function Gallery() {
 				src: p12.src,
 				alt: p12.alt
 			}),
-			cls: "h-[300px]",
+			cls: "min-h-[200px] md:h-[300px]",
 			idx: 11,
 			label: "Bathroom"
 		}
@@ -898,7 +898,7 @@ function Gallery() {
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[300px] gap-7",
+					className: "mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-auto md:auto-rows-[300px] gap-7",
 					children: tiles.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: `relative group ${t.cls}`,
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -1234,7 +1234,7 @@ function Residence() {
 					]
 				})] })]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "mt-20 border-t border-[var(--gold)]/30 pt-10 grid grid-cols-2 md:grid-cols-5 gap-8 text-center",
+				className: "mt-20 border-t border-[var(--gold)]/30 pt-10 grid grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 text-center",
 				children: [
 					["3", "Beds"],
 					["3.5", "Baths"],
@@ -1438,7 +1438,7 @@ function BookingSection() {
 					}, i))
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.form, {
 					onSubmit: handleBook,
-					className: "rounded-[28px] p-8 space-y-6",
+					className: "rounded-[28px] p-6 md:p-8 space-y-6",
 					style: {
 						background: "var(--paper)",
 						boxShadow: "var(--shadow-soft)"
@@ -1793,7 +1793,7 @@ function Offer() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "font-display text-5xl text-[var(--gold)]",
-						children: "$50,000 USD"
+						children: "Freehold"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-6 opacity-80",
@@ -1822,7 +1822,7 @@ function Offer() {
 }
 var faqs = [
 	{
-		q: "Is the $50,000 price freehold?",
+		q: "Is it freehold?",
 		a: "Yes, full freehold ownership. Ready to transfer."
 	},
 	{
@@ -1903,6 +1903,47 @@ function FAQ() {
 		]
 	});
 }
+function MapSection() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+		className: "py-24 md:py-32",
+		style: { background: "var(--sand-soft)" },
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mx-auto max-w-[1200px] px-6 lg:px-12",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "text-center max-w-2xl mx-auto mb-10",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "eyebrow mb-5",
+						children: "Location"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "h1-lux",
+						children: "Less than 200 meters from the lake"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-4 opacity-70 text-sm",
+						children: "Pom PentHouse — Lakeside Road, Pokhara"
+					})
+				]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "rounded-[28px] overflow-hidden shadow-[var(--shadow-soft)]",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("iframe", {
+					src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1606.8902719122848!2d83.9600202093067!3d28.209413397410657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3995952ed26a383f%3A0x9b2bdf424583384a!2sPOM's%20Penthouse!5e1!3m2!1sen!2snp!4v1781969596939!5m2!1sen!2snp",
+					width: "100%",
+					height: "450",
+					style: {
+						border: 0,
+						display: "block"
+					},
+					allowFullScreen: true,
+					loading: "lazy",
+					referrerPolicy: "no-referrer-when-downgrade",
+					title: "Pom PentHouse location"
+				})
+			})]
+		})
+	});
+}
 function Footer() {
 	const handleContact = (e) => {
 		e.preventDefault();
@@ -1913,7 +1954,7 @@ function Footer() {
 		id: "contact",
 		className: "border-t py-24",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "mx-auto max-w-[1200px] px-6 lg:px-12 grid lg:grid-cols-2 gap-16",
+			className: "mx-auto max-w-[1200px] px-6 lg:px-12 grid lg:grid-cols-2 gap-10 lg:gap-16",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
 				onSubmit: handleContact,
 				className: "space-y-4",
@@ -2499,7 +2540,7 @@ function Lightbox() {
 					e.stopPropagation();
 					ui.closeLightbox();
 				},
-				className: "absolute top-5 right-5 text-white p-2",
+				className: "absolute top-5 right-5 text-white p-3 md:p-2",
 				"aria-label": "Close",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {})
 			}),
@@ -2508,7 +2549,7 @@ function Lightbox() {
 					e.stopPropagation();
 					ui.setLightbox((lightboxIndex - 1 + IMAGES.length) % IMAGES.length);
 				},
-				className: "absolute left-4 text-white p-2",
+				className: "absolute left-4 text-white p-3 md:p-2",
 				"aria-label": "Previous",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, {})
 			}),
@@ -2517,7 +2558,7 @@ function Lightbox() {
 					e.stopPropagation();
 					ui.setLightbox((lightboxIndex + 1) % IMAGES.length);
 				},
-				className: "absolute right-4 text-white p-2",
+				className: "absolute right-4 text-white p-3 md:p-2",
 				"aria-label": "Next",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {})
 			}),
@@ -2594,6 +2635,7 @@ function BackToTop() {
 }
 function SmoothScroll() {
 	(0, import_react.useEffect)(() => {
+		if (window.matchMedia("(pointer: coarse)").matches) return;
 		let raf = 0;
 		let lenis = null;
 		(async () => {
@@ -2630,6 +2672,7 @@ function Index() {
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Location, {}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Offer, {}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FAQ, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapSection, {}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footer, {}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookingModal, {}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lightbox, {}),

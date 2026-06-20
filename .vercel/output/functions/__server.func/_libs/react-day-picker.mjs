@@ -1,5 +1,5 @@
 import { o as __toESM, r as __exportAll } from "../_runtime.mjs";
-import { r as require_react } from "./react+tanstack__react-query.mjs";
+import { o as require_react } from "./@radix-ui/react-collection+[...].mjs";
 import { t as TZDate } from "./date-fns__tz.mjs";
 import { A as startOfISOWeek, C as isSameDay, D as addWeeks, E as addYears, M as addMonths, N as addDays, O as differenceInCalendarDays, S as isDate, T as max, _ as endOfYear, a as isBefore, b as endOfMonth, c as getMonth, d as getISOWeek, f as enUS$1, g as startOfYear, h as eachYearOfInterval, i as isSameMonth, j as startOfWeek, k as startOfDay, l as format, m as endOfWeek, n as setMonth, o as isAfter, p as endOfISOWeek, r as isSameYear, s as getYear, t as setYear, u as getWeek, v as startOfMonth, w as min, x as differenceInCalendarMonths, y as eachMonthOfInterval } from "./date-fns.mjs";
 //#region node_modules/react-day-picker/dist/esm/helpers/getBroadcastWeeksInMonth.js
