@@ -11,6 +11,7 @@ import { Testimonial } from "@/components/pom/Testimonial";
 import { Location } from "@/components/pom/Location";
 import { Offer } from "@/components/pom/Offer";
 import { FAQ } from "@/components/pom/FAQ";
+import { MapSection } from "@/components/pom/MapSection";
 import { Footer } from "@/components/pom/Footer";
 import { BookingModal } from "@/components/pom/BookingModal";
 import { Lightbox } from "@/components/pom/Lightbox";
@@ -63,6 +64,7 @@ function Index() {
       <Location />
       <Offer />
       <FAQ />
+      <MapSection />
       <Footer />
       <BookingModal />
       <Lightbox />
