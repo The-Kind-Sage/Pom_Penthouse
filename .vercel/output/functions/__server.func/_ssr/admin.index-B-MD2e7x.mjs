@@ -1,7 +1,7 @@
 import { a as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { C as DollarSign, _ as MessageCircle, f as Percent, k as CalendarCheck } from "../_libs/lucide-react.mjs";
-import { n as useBookingStats, r as useBookings, t as useActivities } from "./hooks-jthhuE6S.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin.index-I5H3HVMI.js
+import { n as useBookingStats, r as useBookings, t as useActivities } from "./hooks-BtYR49bv.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/admin.index-B-MD2e7x.js
 var import_jsx_runtime = require_jsx_runtime();
 function MetricCard({ label, value, trend, icon: Icon, color }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 
-export const resend = new Resend(import.meta.env.RESEND_API_KEY);
+const apiKey = import.meta.env.RESEND_API_KEY || import.meta.env.VITE_RESEND_API_KEY;
+export const resend = apiKey ? new Resend(apiKey) : null;
 
 export const FROM_EMAIL = import.meta.env.RESEND_FROM || "Pom PentHouse <hello@pompenthouse.np>";
 
@@ -13,6 +14,7 @@ export async function sendBookingConfirmation(booking: {
   nights: number;
   total: number;
 }) {
+  if (!resend) { console.warn("Resend not configured — skipping email"); return; }
   return resend.emails.send({
     from: FROM_EMAIL,
     to: booking.guestEmail,
@@ -43,6 +45,7 @@ export async function sendNewBookingNotification(booking: {
   checkOut: string;
   total: number;
 }) {
+  if (!resend) { console.warn("Resend not configured — skipping email"); return; }
   return resend.emails.send({
     from: FROM_EMAIL,
     to: "hello@pompenthouse.np",
@@ -68,6 +71,7 @@ export async function sendBookingStatusUpdate(booking: {
   penthouseName: string;
   status: string;
 }) {
+  if (!resend) { console.warn("Resend not configured — skipping email"); return; }
   const statusText = booking.status.charAt(0).toUpperCase() + booking.status.slice(1);
   return resend.emails.send({
     from: FROM_EMAIL,
@@ -90,6 +94,7 @@ export async function sendContactNotification(contact: {
   email: string;
   message: string;
 }) {
+  if (!resend) { console.warn("Resend not configured — skipping email"); return; }
   return resend.emails.send({
     from: FROM_EMAIL,
     to: "hello@pompenthouse.np",

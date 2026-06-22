@@ -1,7 +1,7 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { t as createClient } from "./supabase-CzSmxgCc.mjs";
+import { t as createClient } from "./supabase-Crfj8R_k.mjs";
 import { o as require_react } from "../_libs/@radix-ui/react-collection+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin-store-DSIQMR-1.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin-store-D52IB06q.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var state = {
 	isLoading: true,

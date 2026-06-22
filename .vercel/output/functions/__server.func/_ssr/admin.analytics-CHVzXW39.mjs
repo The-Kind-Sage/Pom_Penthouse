@@ -1,7 +1,7 @@
 import { a as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
-import { r as useBookings } from "./hooks-jthhuE6S.mjs";
+import { r as useBookings } from "./hooks-BtYR49bv.mjs";
 import { a as CartesianGrid, c as Cell, i as XAxis, l as ResponsiveContainer, n as BarChart, o as Bar, r as YAxis, s as Pie, t as PieChart, u as Tooltip } from "../_libs/recharts+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin.analytics-B9WJxXrk.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin.analytics-CHVzXW39.js
 var import_jsx_runtime = require_jsx_runtime();
 var COLORS = [
 	"#C9A86C",

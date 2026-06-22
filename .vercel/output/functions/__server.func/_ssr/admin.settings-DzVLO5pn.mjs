@@ -1,11 +1,11 @@
 import { o as __toESM } from "../_runtime.mjs";
 import { a as require_jsx_runtime, o as require_react } from "../_libs/@radix-ui/react-collection+[...].mjs";
-import { d as useUpdateSetting, s as useSettings } from "./hooks-jthhuE6S.mjs";
+import { d as useUpdateSetting, s as useSettings } from "./hooks-BtYR49bv.mjs";
 import { t as clsx } from "../_libs/clsx.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
 import { i as Trigger, n as List, r as Root2, t as Content } from "../_libs/radix-ui__react-tabs.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin.settings-CQHWZRuO.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin.settings-DzVLO5pn.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function cn(...inputs) {

@@ -1,15 +1,21 @@
 import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.config({
-  cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
-  api_key: import.meta.env.CLOUDINARY_API_KEY,
-  api_secret: import.meta.env.CLOUDINARY_API_SECRET,
-  secure: true,
-});
+const isConfigured = import.meta.env.CLOUDINARY_CLOUD_NAME && import.meta.env.CLOUDINARY_API_KEY && import.meta.env.CLOUDINARY_API_SECRET;
+
+if (isConfigured) {
+  cloudinary.config({
+    cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
+    api_key: import.meta.env.CLOUDINARY_API_KEY,
+    api_secret: import.meta.env.CLOUDINARY_API_SECRET,
+    secure: true,
+  });
+}
 
 export { cloudinary };
 
 export async function uploadImage(file: File, folder = "pom-penthouse") {
+  if (!isConfigured) throw new Error("Cloudinary not configured — add CLOUDINARY_* env vars");
+
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
@@ -30,5 +36,6 @@ export async function uploadImage(file: File, folder = "pom-penthouse") {
 }
 
 export async function deleteImage(publicId: string) {
+  if (!isConfigured) throw new Error("Cloudinary not configured");
   return cloudinary.uploader.destroy(publicId);
 }

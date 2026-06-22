@@ -5,12 +5,12 @@ import { c as HeadContent, d as createRouter, f as Outlet, g as Link, h as creat
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { r as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { t as require_cloudinary } from "../_libs/cloudinary+lodash.mjs";
-import { t as Resend } from "../_libs/resend+standardwebhooks.mjs";
+import "../_libs/resend+standardwebhooks.mjs";
 import { a as numberType, c as stringType, i as literalType, l as unknownType, n as booleanType, o as objectType, r as enumType, s as recordType, t as arrayType } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-DqFgnw5j.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-DAuvQ2f2.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var import_cloudinary = require_cloudinary();
+require_cloudinary();
 var styles_default = "/assets/styles-Drk6X82H.css";
 var favicon_32x32_default = "data:image/png;base64,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";
 var favicon_16x16_default = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACV0lEQVR4ATySP09UQRTFf/N2QcWERnGhlQZxTeRPA81SUSwFQkGQhGCFXwFDQkcNFCRIJaVaSYUQSFwTDDFCsKEnECMQCtdGxL2eO+8tszP3zZx7zrlz39vErDZnZn+sVjPTtPrQ2Y++bnA/+Eo50thcAsxqNULAAmC+PAQhvtcKWj79GTznBxrFn02MILEAJTWjnhA4vzinUvlE5XOFs7OfImiaqUDG0jaYNSaqq0x9GsfHx4yOjtLW2kapNMBAqUShtZVnw8MyvciIMtH0QrpBhsnx+u81z8fH6enpZWt7i8vLS46OjiiXy3xYX2dychJcqHuKrgjJTUsB8g15dr/sMv1ymomJCaq/qnR0dLC0uBR1m5ubVH9X0zbkIAm6Qb0JIZEGiwsL6vuMey33RTZyuXyslsvlaMjniSPESJJqJNYrFZt/tRpv1tZof9jO3aYmHH7/7m1kj4yMcOv2HVzjeqnQS/SzjrGXwMG3fX6cntKr97C6uspQeYiZVzN0Pe1ieXkZH0b6k4rEAa+MbA3Y3tlRGrq6u+nv72dsbIyNjY/sfd2jpaVFjPp0OZmBKx3Xd94/2PcdhcIDio+LTE29YHBwUL03ROMAKkUcfo/0BvrjOBKUOj050TbQ3NysJwRvTcbEoUqaEPAR9JSB+6RNIHIICS4qFAr4C3SieQEJgx88ZHv3TeqY4654vbLC4eF3+vr63E/pQPzQwYsoCBHgEfeVQbhCjp52xaPOTp4UiyIIzPhYukmjcGUjH65kYPMW7CpiBNzVgxEyTprxaB6yZQTXzP8HAAD//4em+KcAAAAGSURBVAMAEN38yTmbTjcAAAAASUVORK5CYII=";
@@ -181,7 +181,7 @@ function RootComponent() {
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {})
 	});
 }
-var $$splitComponentImporter$8 = () => import("./admin-B-gvZQJj.mjs");
+var $$splitComponentImporter$8 = () => import("./admin-BfpEZV9N.mjs");
 var Route$11 = createFileRoute("/admin")({
 	component: lazyRouteComponent($$splitComponentImporter$8, "component"),
 	ssr: false,
@@ -234,33 +234,10 @@ var Route$10 = createFileRoute("/")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./admin.index-I5H3HVMI.mjs");
+var $$splitComponentImporter$6 = () => import("./admin.index-B-MD2e7x.mjs");
 var Route$9 = createFileRoute("/admin/")({ component: lazyRouteComponent($$splitComponentImporter$6, "component") });
-import_cloudinary.v2.config({
-	cloud_name: void 0,
-	api_key: void 0,
-	api_secret: void 0,
-	secure: true
-});
 async function uploadImage(file, folder = "pom-penthouse") {
-	const bytes = await file.arrayBuffer();
-	const buffer = Buffer.from(bytes);
-	return new Promise((resolve, reject) => {
-		import_cloudinary.v2.uploader.upload_stream({
-			folder,
-			resource_type: "image",
-			transformation: [{
-				quality: "auto",
-				fetch_format: "auto"
-			}]
-		}, (error, result) => {
-			if (error) reject(error);
-			else resolve({
-				url: result.secure_url,
-				public_id: result.public_id
-			});
-		}).end(buffer);
-	});
+	throw new Error("Cloudinary not configured — add CLOUDINARY_* env vars");
 }
 var Route$8 = createFileRoute("/api/upload")({ server: { handlers: { POST: async ({ request }) => {
 	try {
@@ -314,62 +291,14 @@ function createServiceClient() {
 		}
 	});
 }
-var resend = new Resend(void 0);
-var FROM_EMAIL = "Pom PentHouse <hello@pompenthouse.np>";
 async function sendBookingConfirmation(booking) {
-	return resend.emails.send({
-		from: FROM_EMAIL,
-		to: booking.guestEmail,
-		subject: `Booking Confirmed — ${booking.penthouseName}`,
-		html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #1a1a1a;">Booking Confirmed</h1>
-        <p>Dear ${booking.guestName},</p>
-        <p>Your booking at <strong>${booking.penthouseName}</strong> is confirmed.</p>
-        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee;">Check-in</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${booking.checkIn}</td></tr>
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee;">Check-out</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${booking.checkOut}</td></tr>
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee;">Nights</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${booking.nights}</td></tr>
-          <tr><td style="padding: 8px; font-weight: bold;">Total</td><td style="padding: 8px; font-weight: bold;">रू ${booking.total.toLocaleString("en-IN")}</td></tr>
-        </table>
-        <p>We look forward to hosting you.</p>
-        <p>Best,<br/>Pom PentHouse</p>
-      </div>
-    `
-	});
+	console.warn("Resend not configured — skipping email");
 }
 async function sendNewBookingNotification(booking) {
-	return resend.emails.send({
-		from: FROM_EMAIL,
-		to: "hello@pompenthouse.np",
-		subject: `New Booking — ${booking.penthouseName}`,
-		html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #1a1a1a;">New Booking Received</h1>
-        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee;">Guest</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${booking.guestName} (${booking.guestEmail})</td></tr>
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee;">Penthouse</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${booking.penthouseName}</td></tr>
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee;">Check-in</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${booking.checkIn}</td></tr>
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee;">Check-out</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${booking.checkOut}</td></tr>
-          <tr><td style="padding: 8px; font-weight: bold;">Total</td><td style="padding: 8px; font-weight: bold;">रू ${booking.total.toLocaleString("en-IN")}</td></tr>
-        </table>
-      </div>
-    `
-	});
+	console.warn("Resend not configured — skipping email");
 }
 async function sendContactNotification(contact) {
-	return resend.emails.send({
-		from: FROM_EMAIL,
-		to: "hello@pompenthouse.np",
-		subject: `New Contact Message — ${contact.name}`,
-		html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #1a1a1a;">New Contact Message</h1>
-        <p><strong>From:</strong> ${contact.name} (${contact.email})</p>
-        <p style="background: #f5f5f5; padding: 16px; border-radius: 8px; margin: 20px 0;">${contact.message}</p>
-      </div>
-    `
-	});
+	console.warn("Resend not configured — skipping email");
 }
 objectType({
 	email: stringType().email("Invalid email"),
@@ -508,17 +437,17 @@ var Route$6 = createFileRoute("/api/bookings")({ server: { handlers: { POST: asy
 		});
 	}
 } } } });
-var $$splitComponentImporter$5 = () => import("./admin.users-D9LZR6Gw.mjs");
+var $$splitComponentImporter$5 = () => import("./admin.users-GpEXDfgU.mjs");
 var Route$5 = createFileRoute("/admin/users")({ component: lazyRouteComponent($$splitComponentImporter$5, "component") });
-var $$splitComponentImporter$4 = () => import("./admin.settings-CQHWZRuO.mjs");
+var $$splitComponentImporter$4 = () => import("./admin.settings-DzVLO5pn.mjs");
 var Route$4 = createFileRoute("/admin/settings")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
-var $$splitComponentImporter$3 = () => import("./admin.penthouses-BEKTDvtu.mjs");
+var $$splitComponentImporter$3 = () => import("./admin.penthouses-D2eRyFIc.mjs");
 var Route$3 = createFileRoute("/admin/penthouses")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
-var $$splitComponentImporter$2 = () => import("./admin.login-G2L-N0Ep.mjs");
+var $$splitComponentImporter$2 = () => import("./admin.login-BHFQ4wYZ.mjs");
 var Route$2 = createFileRoute("/admin/login")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
-var $$splitComponentImporter$1 = () => import("./admin.bookings-C1Q-NZpA.mjs");
+var $$splitComponentImporter$1 = () => import("./admin.bookings-BghNRflo.mjs");
 var Route$1 = createFileRoute("/admin/bookings")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./admin.analytics-B9WJxXrk.mjs");
+var $$splitComponentImporter = () => import("./admin.analytics-CHVzXW39.mjs");
 var Route = createFileRoute("/admin/analytics")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
 var AdminRoute = Route$11.update({
 	id: "/admin",

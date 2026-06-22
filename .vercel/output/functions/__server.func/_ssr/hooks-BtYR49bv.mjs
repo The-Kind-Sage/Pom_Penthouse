@@ -1,6 +1,6 @@
-import { t as createClient } from "./supabase-CzSmxgCc.mjs";
+import { t as createClient } from "./supabase-Crfj8R_k.mjs";
 import { i as useQueryClient, n as useQuery, t as useMutation } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/hooks-jthhuE6S.js
+//#region node_modules/.nitro/vite/services/ssr/assets/hooks-BtYR49bv.js
 function supabase() {
 	return createClient();
 }

@@ -1,4 +1,4 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-BZrmBqF5.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-C2AAFBbO.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/__root.tsx",
@@ -9,11 +9,11 @@ var tsrStartManifest = () => ({ routes: {
 			"/api/contact",
 			"/api/upload"
 		],
-		preloads: ["/assets/index-Djp8wsw2.js", "/assets/preload-helper-BOZUuptP.js"],
+		preloads: ["/assets/index-BvUzs8qo.js", "/assets/preload-helper-BOZUuptP.js"],
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-Djp8wsw2.js"
+			src: "/assets/index-BvUzs8qo.js"
 		} }]
 	},
 	"/": {
@@ -21,12 +21,12 @@ var tsrStartManifest = () => ({ routes: {
 		children: void 0,
 		css: ["/assets/routes-BxgC7ZK2.css"],
 		preloads: [
-			"/assets/routes-BfvfX4FU.js",
+			"/assets/routes-Br4UE3z5.js",
 			"/assets/createLucideIcon-ywJmPz9b.js",
 			"/assets/sun-BcBAmWxc.js",
 			"/assets/plus-B49q9zNI.js",
 			"/assets/x-CE6md29j.js",
-			"/assets/dist-vC-MrGSp.js"
+			"/assets/dist-KHTsjZrp.js"
 		]
 	},
 	"/admin": {
@@ -41,20 +41,20 @@ var tsrStartManifest = () => ({ routes: {
 			"/admin/"
 		],
 		preloads: [
-			"/assets/admin-BE49O0em.js",
+			"/assets/admin-mJ6rXAzq.js",
 			"/assets/createLucideIcon-ywJmPz9b.js",
 			"/assets/sun-BcBAmWxc.js",
 			"/assets/calendar-check-CrFW2h_T.js",
 			"/assets/search-_2P8bcJ9.js",
-			"/assets/admin-store-Sz9XmtzB.js"
+			"/assets/admin-store-BZm403S9.js"
 		]
 	},
 	"/admin/analytics": {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/admin.analytics.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/admin.analytics--SkZFR0e.js",
-			"/assets/hooks-oYLkyfp7.js",
+			"/assets/admin.analytics-CSNFNlNm.js",
+			"/assets/hooks-BBvpv8Hu.js",
 			"/assets/clsx-CjueKrWZ.js"
 		]
 	},
@@ -62,51 +62,51 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/admin.bookings.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/admin.bookings-Biix5KXp.js",
-			"/assets/hooks-oYLkyfp7.js",
+			"/assets/admin.bookings-DK2cf2I0.js",
+			"/assets/hooks-BBvpv8Hu.js",
 			"/assets/x-CE6md29j.js",
-			"/assets/dist-vC-MrGSp.js"
+			"/assets/dist-KHTsjZrp.js"
 		]
 	},
 	"/admin/login": {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/admin.login.tsx",
 		children: void 0,
-		preloads: ["/assets/admin.login-BGRWzaQ_.js"]
+		preloads: ["/assets/admin.login-BIlD-qm7.js"]
 	},
 	"/admin/penthouses": {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/admin.penthouses.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/admin.penthouses-DwiouGCC.js",
-			"/assets/hooks-oYLkyfp7.js",
+			"/assets/admin.penthouses-DxFjO37i.js",
+			"/assets/hooks-BBvpv8Hu.js",
 			"/assets/plus-B49q9zNI.js",
 			"/assets/x-CE6md29j.js",
-			"/assets/dist-vC-MrGSp.js"
+			"/assets/dist-KHTsjZrp.js"
 		]
 	},
 	"/admin/settings": {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/admin.settings.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/admin.settings-BWdCQrm5.js",
-			"/assets/hooks-oYLkyfp7.js",
+			"/assets/admin.settings-vcxcgrZc.js",
+			"/assets/hooks-BBvpv8Hu.js",
 			"/assets/clsx-CjueKrWZ.js",
-			"/assets/dist-vC-MrGSp.js"
+			"/assets/dist-KHTsjZrp.js"
 		]
 	},
 	"/admin/users": {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/admin.users.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/admin.users-DlEfq7ga.js",
-			"/assets/hooks-oYLkyfp7.js",
-			"/assets/dist-vC-MrGSp.js"
+			"/assets/admin.users-CFBzpnCp.js",
+			"/assets/hooks-BBvpv8Hu.js",
+			"/assets/dist-KHTsjZrp.js"
 		]
 	},
 	"/admin/": {
 		filePath: "D:/DrillThru Projects/pom-penthouse/src/routes/admin.index.tsx",
 		children: void 0,
-		preloads: ["/assets/admin.index-DCc1eT54.js", "/assets/hooks-oYLkyfp7.js"]
+		preloads: ["/assets/admin.index-B1Zwy9tQ.js", "/assets/hooks-BBvpv8Hu.js"]
 	}
 } });
 //#endregion
