@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { getDb } from "./mongodb";
 import { hashPassword } from "./auth";
 
