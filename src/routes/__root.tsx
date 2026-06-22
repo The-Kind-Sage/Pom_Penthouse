@@ -10,10 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import favicon32 from "../favicon/favicon-32x32.png?url";
-import favicon16 from "../favicon/favicon-16x16.png?url";
-import faviconIco from "../favicon/favicon.ico?url";
-import appleTouchIcon from "../favicon/apple-touch-icon.png?url";
+import logoUrl from "../favicon/logo.png?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -91,10 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
-      { rel: "icon", type: "image/svg+xml", href: faviconIco },
-      { rel: "icon", type: "image/png", sizes: "32x32", href: favicon32 },
-      { rel: "icon", type: "image/png", sizes: "16x16", href: favicon16 },
-      { rel: "apple-touch-icon", sizes: "180x180", href: appleTouchIcon },
+      { rel: "icon", type: "image/png", href: logoUrl },
+      { rel: "apple-touch-icon", href: logoUrl },
       { rel: "stylesheet", href: appCss },
     ],
   }),

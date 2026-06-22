@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { ui } from "@/lib/ui-store";
+import logoUrl from "../../favicon/logo.png?url";
 
 const links = [
   { href: "#about", label: "About" },
@@ -49,10 +50,10 @@ export function Navbar() {
       <div className="mx-auto max-w-[1200px] px-6 lg:px-12 flex items-center justify-between">
         <a
           href="#top"
-          className="glitch-hover font-display text-2xl tracking-tight"
+          className="flex items-center"
           aria-label="Pom PentHouse home"
         >
-          Pom
+          <img src={logoUrl} alt="Pom PentHouse" className="h-14 w-auto" />
         </a>
 
         <nav className="hidden md:flex items-center gap-9 text-sm">
@@ -86,7 +87,7 @@ export function Navbar() {
       {open && (
         <div className="fixed inset-0 z-[60] bg-[var(--paper)] flex flex-col">
           <div className="flex justify-between items-center px-6 py-5 border-b">
-            <span className="font-display text-2xl">Pom</span>
+            <img src={logoUrl} alt="Pom" className="h-12 w-auto" />
             <button onClick={() => setOpen(false)} aria-label="Close menu">
               <X size={24} />
             </button>

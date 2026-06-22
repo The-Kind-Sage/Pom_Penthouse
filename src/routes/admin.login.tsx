@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { adminStore } from "@/lib/admin-store";
+import logoUrl from "../favicon/logo.png?url";
 
 export const Route = createFileRoute("/admin/login")({
   component: LoginPage,
@@ -30,10 +31,10 @@ function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <form onSubmit={handleLogin} className="w-full max-w-sm bg-paper border rounded-2xl p-8 space-y-6 shadow-lg">
-        <div className="text-center">
-          <h1 className="font-display text-3xl">Pom Admin</h1>
-          <p className="text-sm text-foreground/60 mt-1">Sign in to your dashboard</p>
-        </div>
+          <div className="text-center">
+            <img src={logoUrl} alt="Pom" className="h-20 w-auto mx-auto mb-4" />
+            <p className="text-sm text-foreground/60">Sign in to your dashboard</p>
+          </div>
         {error && (
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-sm px-4 py-2.5 rounded-xl">
             {error}

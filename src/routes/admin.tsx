@@ -6,6 +6,7 @@ import {
   ChevronLeft, ChevronRight, Bell, Search, Moon, Sun, LogOut, User,
   Menu,
 } from "lucide-react";
+import logoUrl from "../favicon/logo.png?url";
 
 const navItems = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
@@ -91,7 +92,7 @@ function AdminLayout() {
       >
         <div className="flex items-center justify-between h-16 px-4 border-b shrink-0">
           {sidebarOpen && (
-            <Link to="/" className="font-display text-xl tracking-tight">Pom Admin</Link>
+            <Link to="/" className="flex items-center gap-2"><img src={logoUrl} alt="Pom" className="h-10 w-auto" /></Link>
           )}
           <button onClick={() => { adminStore.toggleSidebar(); setMobileOpen(false); }}
             className="p-1.5 rounded-lg hover:bg-muted transition">
