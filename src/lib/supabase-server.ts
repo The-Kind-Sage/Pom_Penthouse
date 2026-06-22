@@ -2,8 +2,8 @@ import { createServerClient as createSSRClient } from "@supabase/ssr";
 
 export function createServerClient(request: Request) {
   return createSSRClient(
-    import.meta.env.SUPABASE_URL!,
-    import.meta.env.SUPABASE_SERVICE_ROLE_KEY!,
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
       cookies: {
         getAll() {
@@ -23,8 +23,8 @@ export function createServerClient(request: Request) {
 
 export function createServiceClient() {
   return createSSRClient(
-    import.meta.env.SUPABASE_URL!,
-    import.meta.env.SUPABASE_SERVICE_ROLE_KEY!,
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
       cookies: {
         getAll() {
