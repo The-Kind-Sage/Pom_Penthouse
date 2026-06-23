@@ -65,6 +65,7 @@ export function BookingModal() {
   const [checkinDate, setCheckinDate] = useState<Date>();
   const [checkoutDate, setCheckoutDate] = useState<Date>();
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const selected = ALL_OPTIONS.find((o) => o.name === form.apartment) ?? ALL_OPTIONS[0];
 
@@ -95,17 +96,23 @@ export function BookingModal() {
     return () => window.removeEventListener("poms:open-booking", onOpen);
   }, []);
 
-  function onSubmit() {
+  async function onSubmit() {
     if (!form.name.trim() || !form.email.trim() || !form.checkin || !form.checkout) return;
-    const msg = encodeURIComponent(
-      `New Booking Inquiry — POM'S Penthouse\n\n` +
-        `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n` +
-        `Apartment: ${form.apartment}\nGuests: ${form.guests}\n` +
-        `Check-in: ${form.checkin}\nCheck-out: ${form.checkout}\n\n` +
-        `Message: ${form.message}`
-    );
-    window.open(`https://wa.me/9779840814142?text=${msg}`, "_blank");
-    setSent(true);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/booking-whatsapp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to submit");
+      setSent(true);
+    } catch (err: any) {
+      alert(err?.message || "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -124,14 +131,14 @@ export function BookingModal() {
           <div className="col-span-3 flex flex-col">
             <div className="border-b border-border bg-luxury-black px-6 py-5 text-white">
               <div className="mb-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-gold">
-                <span className="h-px w-6 bg-gold" />Booking Inquiry
+                <span className="h-px w-6 bg-gold" />Confirm Your Booking
               </div>
               <DialogHeader className="space-y-1 text-left">
                 <DialogTitle className="font-display text-2xl font-medium text-white sm:text-3xl">
                   Reserve Your <span className="italic text-gold">Stay</span>
                 </DialogTitle>
                 <DialogDescription className="text-xs text-white/70">
-                  Tell us your dates. Our team replies within the hour.
+                  Fill in the details below. Our team confirms via WhatsApp within the hour.
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -217,16 +224,15 @@ export function BookingModal() {
                 </div>
                 <div className="flex flex-col items-start gap-3 md:col-span-2 md:flex-row md:items-center md:justify-between">
                   <p className="text-xs text-muted-foreground">
-                    Opens WhatsApp with your inquiry pre-filled. Email{" "}
-                    <a href="mailto:stay@pomspenthouse.com" className="text-gold hover:underline">stay@pomspenthouse.com</a>.
+                    Your inquiry is sent directly to our team. We reply within the hour.
                   </p>
-                  <Button onClick={onSubmit} className="rounded-full bg-gold px-6 py-5 text-xs font-semibold uppercase tracking-[0.25em] text-luxury-black hover:brightness-110">
-                    Send Inquiry <ArrowRight className="ml-2 size-4" />
+                  <Button onClick={onSubmit} disabled={submitting} className="rounded-full bg-gold px-6 py-5 text-xs font-semibold uppercase tracking-[0.25em] text-luxury-black hover:brightness-110 disabled:opacity-60">
+                    {submitting ? "Sending..." : "Confirm Booking"} <ArrowRight className="ml-2 size-4" />
                   </Button>
                 </div>
                 {sent && (
                   <p className="rounded-md border border-gold/40 bg-gold/10 px-4 py-3 text-sm text-luxury-black md:col-span-2">
-                    Thank you! Your inquiry has been opened in WhatsApp &mdash; we&apos;ll reply within the hour.
+                    Thank you! Your booking inquiry has been received. We&apos;ll get back to you shortly.
                   </p>
                 )}
               </div>
