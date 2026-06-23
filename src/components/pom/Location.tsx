@@ -49,8 +49,9 @@ export function Location() {
           >
             <iframe
               title="POM'S Penthouse — Lakeside, Pokhara"
-              src="https://www.google.com/maps?q=Lakeside,+Pokhara,+Nepal&output=embed"
-              className="aspect-[4/3] w-full grayscale invert-[0.92] hue-rotate-180"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3213.7720105159715!2d83.95791376583846!3d28.209697011336996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3995952ed26a383f%3A0x9b2bdf424583384a!2sPOM's+Penthouse!5e1!3m2!1sen!2snp!4v1782229596936!5m2!1sen!2snp"
+              className="aspect-[4/3] w-full"
+              style={{ colorScheme: "light" }}
               loading="lazy"
             />
           </motion.div>
