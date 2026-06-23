@@ -97,7 +97,7 @@ export function BookingModal() {
         `Check-in: ${form.checkin}\nCheck-out: ${form.checkout}\n\n` +
         `Message: ${form.message}`
     );
-    window.open(`https://wa.me/9779800000000?text=${msg}`, "_blank");
+    window.open(`https://wa.me/9779840814142?text=${msg}`, "_blank");
     setSent(true);
   }
 

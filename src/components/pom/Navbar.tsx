@@ -42,8 +42,8 @@ function MobileMenu({ scrolled, links }: { scrolled: boolean; links: readonly (r
             ))}
           </nav>
           <div className="mt-2 border-t border-border pt-2">
-            <a href="tel:+9779800000000" className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-luxury-black/80 transition hover:bg-muted hover:text-gold">
-              <Phone className="size-4" /> +977 980-000-0000
+            <a href="tel:+9779840814142" className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-luxury-black/80 transition hover:bg-muted hover:text-gold">
+              <Phone className="size-4" /> +977 984-081-4142
             </a>
 
           </div>
@@ -102,13 +102,13 @@ export function Navbar() {
 
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
           <a
-            href="tel:+9779800000000"
+            href="tel:+9779840814142"
             className={`hidden items-center gap-1.5 whitespace-nowrap text-xs font-medium transition lg:inline-flex ${
               scrolled ? "text-luxury-black hover:text-gold" : "text-white hover:text-gold"
             }`}
           >
             <Phone className="size-3.5 shrink-0" />
-            <span className="hidden xl:inline">+977 980-000-0000</span>
+            <span className="hidden xl:inline">+977 984-081-4142</span>
             <span className="xl:hidden">Call</span>
           </a>
           <button

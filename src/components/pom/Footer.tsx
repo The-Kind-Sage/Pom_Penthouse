@@ -40,7 +40,7 @@ export function Footer() {
           <h4 className="font-display text-sm uppercase tracking-[0.3em] text-gold">Contact</h4>
           <ul className="mt-5 space-y-3 text-sm">
             <li className="flex gap-3"><MapPin className="mt-0.5 size-4 text-gold" /> Lakeside, Pokhara, Nepal</li>
-            <li className="flex gap-3"><Phone className="mt-0.5 size-4 text-gold" /> +977 980-000-0000</li>
+            <li className="flex gap-3"><Phone className="mt-0.5 size-4 text-gold" /> +977 984-081-4142</li>
             <li className="flex gap-3"><Mail className="mt-0.5 size-4 text-gold" /> stay@pomspenthouse.com</li>
             <li className="flex gap-3"><Mountain className="mt-0.5 size-4 text-gold" /> Views of Phewa & Annapurna</li>
           </ul>

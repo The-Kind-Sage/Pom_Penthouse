@@ -30,7 +30,7 @@ export function Offer() {
             <button type="button" onClick={openBooking} className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-luxury-black transition hover:brightness-110">
               Book Now <ArrowRight className="size-4" />
             </button>
-            <a href="https://wa.me/9779800000000" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.25em] text-white backdrop-blur-md transition hover:bg-white hover:text-luxury-black">
+            <a href="https://wa.me/9779840814142" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.25em] text-white backdrop-blur-md transition hover:bg-white hover:text-luxury-black">
               <MessageCircle className="size-4" /> WhatsApp Us
             </a>
           </motion.div>
