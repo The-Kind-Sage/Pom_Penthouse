@@ -36,6 +36,15 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 export function BookingModal() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
   const [form, setForm] = useState({
     name: "", email: "", phone: "", checkin: "", checkout: "",
     guests: "2", apartment: "Deluxe Studio", message: "",
