@@ -1,139 +1,90 @@
-import { useRef } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { photo } from "@/lib/images";
-import { ui } from "@/lib/ui-store";
+import { motion } from "framer-motion";
+import { Users, Square, ArrowRight } from "lucide-react";
+import aptStudio from "@/assets/apt-studio.jpg";
+import aptExec from "@/assets/apt-executive.jpg";
+import aptFamily from "@/assets/apt-family.jpg";
+import aptPent from "@/assets/apt-penthouse.jpg";
 
-function TiltShift({ p }: { p: ReturnType<typeof photo> }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(0.5);
-  const my = useMotionValue(0.5);
-  const rx = useSpring(useTransform(my, [0, 1], [8, -8]), { stiffness: 220, damping: 22 });
-  const ry = useSpring(useTransform(mx, [0, 1], [-8, 8]), { stiffness: 220, damping: 22 });
+const fadeUp = { hidden: { opacity: 0, y: 32 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
 
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={(e) => {
-        const r = (ref.current as HTMLDivElement).getBoundingClientRect();
-        mx.set((e.clientX - r.left) / r.width);
-        my.set((e.clientY - r.top) / r.height);
-      }}
-      onMouseLeave={() => {
-        mx.set(0.5);
-        my.set(0.5);
-      }}
-      style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
-      className="relative overflow-hidden rounded-[28px] shadow-[var(--shadow-soft)] aspect-[4/5]"
-    >
-      <img
-        src={p.src}
-        alt={p.alt}
-        loading="lazy"
-        decoding="async"
-        className="object-cover w-full h-full"
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,0,0,0.45) 100%)",
-        }}
-      />
-    </motion.div>
-  );
+function openBooking(apartment?: string) {
+  window.dispatchEvent(new CustomEvent("poms:open-booking", { detail: apartment }));
 }
 
-function SplitScreen({ p }: { p: ReturnType<typeof photo> }) {
-  return (
-    <div className="group relative overflow-hidden rounded-[28px] shadow-[var(--shadow-soft)] aspect-[4/5]">
-      {/* Night under-layer */}
-      <img
-        src={p.src}
-        alt=""
-        aria-hidden
-        loading="lazy"
-        decoding="async"
-        className="absolute inset-0 object-cover w-full h-full"
-        style={{ filter: "brightness(0.45) saturate(0.8) hue-rotate(210deg)" }}
-      />
-      {/* Day top layer with diagonal clip */}
-      <img
-        src={p.src}
-        alt={p.alt}
-        loading="lazy"
-        decoding="async"
-        className="absolute inset-0 object-cover w-full h-full transition-[clip-path] duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-      />
-      <style>{`
-        .splitscreen-day { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-      `}</style>
-      <div
-        className="absolute inset-0 transition-all duration-[550ms]"
-        style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-      />
-      <div
-        className="absolute inset-0 group-hover:[clip-path:polygon(0_0,0_0,0_100%,0_100%)] transition-all duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] bg-cover"
-        style={{ backgroundImage: `url(${p.src})` }}
-      />
-      <div className="absolute inset-x-0 bottom-0 p-6 text-white bg-gradient-to-t from-black/70 to-transparent">
-        <h3 className="h3-lux">Sunset Lounge</h3>
-        <p className="text-sm mt-1 opacity-90">
-          Hover to see night. Low oak sofa. Hand-thrown ceramics. Vinyl.
-        </p>
-      </div>
-    </div>
-  );
-}
+const APARTMENTS = [
+  { name: "Deluxe Studio", img: aptStudio, price: "$65", desc: "An elegant studio retreat with mountain views, perfect for solo travelers and couples.", capacity: "1–2 Guests", area: "38 m²", features: ["Queen Bed", "Kitchenette", "Smart TV", "Mountain View"] },
+  { name: "Executive Suite", img: aptExec, price: "$95", desc: "Refined one-bedroom suite tailored for the business traveler who refuses to compromise.", capacity: "1–3 Guests", area: "55 m²", features: ["King Bed", "Workspace", "Lounge Area", "Lake Glimpse"] },
+  { name: "Family Apartment", img: aptFamily, price: "$140", desc: "Spacious two-bedroom apartment with a full kitchen and dining — a true home away from home.", capacity: "3–5 Guests", area: "82 m²", features: ["2 Bedrooms", "Full Kitchen", "Dining Area", "Washer"] },
+  { name: "Penthouse Suite", img: aptPent, price: "$220", desc: "Our signature residence: double-height ceilings, panoramic Annapurna views and a private terrace.", capacity: "2–4 Guests", area: "120 m²", features: ["Private Terrace", "Fireplace", "Panorama View", "Premium Service"] },
+];
 
 export function Residence() {
   return (
-    <section id="residence" className="py-24 md:py-40">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          <div>
-            {/* Photo 17/20 — Tilt & Shift */}
-            <TiltShift p={photo(17)} />
-            <div className="mt-6">
-              <p className="eyebrow mb-2">Suite</p>
-              <h3 className="h2-lux">Master Suite</h3>
-              <p className="mt-3 opacity-80 max-w-md">
-                King linen bed. Lake-facing glass. Limestone soaking bath. Walk-in cedar closet.
-              </p>
-              <button onClick={ui.openBooking} className="btn-primary mt-4 text-sm py-2 px-5">
-                Book Now — रू14,850 / night
-              </button>
-            </div>
+    <section id="apartments" className="bg-background py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mb-4 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.4em] text-gold">
+            <span className="h-px w-8 bg-gold" />The Residences<span className="h-px w-8 bg-gold" />
           </div>
-          <div>
-            {/* Photo 18/20 — Split Screen */}
-            <SplitScreen p={photo(18)} />
-            <div className="mt-6">
-              <p className="eyebrow mb-2">Lounge</p>
-              <h3 className="h2-lux">Sunset Lounge</h3>
-              <p className="mt-3 opacity-80 max-w-md">
-                Hover to see night. Low oak sofa. Hand-thrown ceramics. Vinyl.
-              </p>
-              <button onClick={ui.openBooking} className="btn-primary mt-4 text-sm py-2 px-5">
-                Book Now — रू25,500 / night
-              </button>
-            </div>
-          </div>
+          <h2 className="font-display text-4xl font-medium leading-tight text-luxury-black sm:text-5xl">
+            Featured <span className="italic text-gold">Apartments</span>
+          </h2>
+          <p className="mt-5 text-muted-foreground">
+            Four signature residences, each designed with curated materials, considered light and the warmth of home.
+          </p>
         </div>
-
-        <div className="mt-20 border-t border-[var(--gold)]/30 pt-10 grid grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 text-center">
-          {[
-            ["3", "Beds"],
-            ["3.5", "Baths"],
-            ["2,150", "Sq ft"],
-            ["420", "Terrace sq ft"],
-            ["2", "Parking"],
-          ].map(([n, l]) => (
-            <div key={l}>
-              <div className="font-display text-5xl">{n}</div>
-              <div className="text-xs uppercase tracking-[0.2em] mt-2 opacity-60">{l}</div>
-            </div>
+        <motion.div
+          initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} variants={stagger}
+          className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-2"
+        >
+          {APARTMENTS.map((a) => (
+            <motion.article
+              key={a.name} variants={fadeUp}
+              className="group relative flex flex-col overflow-hidden rounded-[2px] border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-30px_rgba(17,17,17,0.4)]"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src={a.img} alt={a.name} loading="lazy" className="size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/80 via-luxury-black/10 to-transparent" />
+                <span className="absolute left-5 top-5 rounded-full bg-gold/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-luxury-black">
+                  Available
+                </span>
+                <span className="absolute right-5 top-5 flex items-baseline gap-1 rounded-full border border-white/30 bg-luxury-black/40 px-3 py-1 text-white backdrop-blur-md">
+                  <span className="font-display text-base">{a.price}</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/70">/ night</span>
+                </span>
+                <div className="absolute inset-x-5 bottom-5 flex items-end justify-between text-white">
+                  <h3 className="font-display text-2xl font-medium sm:text-3xl">{a.name}</h3>
+                  <div className="flex items-center gap-3 text-xs text-white/85">
+                    <span className="inline-flex items-center gap-1"><Users className="size-3.5 text-gold" />{a.capacity}</span>
+                    <span className="inline-flex items-center gap-1"><Square className="size-3.5 text-gold" />{a.area}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-1 flex-col p-7">
+                <p className="text-sm leading-relaxed text-muted-foreground">{a.desc}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {a.features.map((f) => (
+                    <span key={f} className="rounded-full border border-border bg-muted px-3 py-1 text-[11px] text-luxury-black/80">{f}</span>
+                  ))}
+                </div>
+                <div className="mt-auto flex items-center justify-between gap-3 border-t border-border pt-5">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">From</span>
+                    <span className="font-display text-xl text-luxury-black">{a.price}<span className="ml-1 text-xs text-muted-foreground">/ night</span></span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openBooking(a.name)}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-luxury-black px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gold hover:text-luxury-black"
+                  >
+                    Book Now <ArrowRight className="size-3.5" />
+                  </button>
+                </div>
+              </div>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,46 +1,40 @@
-import { useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { photo } from "@/lib/images";
-import { ui } from "@/lib/ui-store";
+import { motion } from "framer-motion";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import ctaImg from "@/assets/cta.jpg";
+
+const fadeUp = { hidden: { opacity: 0, y: 32 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
+
+function openBooking() {
+  window.dispatchEvent(new CustomEvent("poms:open-booking"));
+}
 
 export function Offer() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const p20 = photo(20);
-
   return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden py-32 md:py-48 text-[var(--sand)]"
-      style={{ background: "var(--charcoal)" }}
-    >
-      {/* Photo 20/20 — Parallax + Liquid Smooth background */}
-      <motion.img
-        src={p20.src}
-        alt={p20.alt}
-        loading="lazy"
-        decoding="async"
-        className="absolute inset-0 object-cover w-full h-[130%] opacity-[0.36]"
-        style={{ y }}
-      />
-      <div className="absolute inset-0 bg-[var(--charcoal)]/50" />
-      <div className="relative z-10 max-w-2xl mx-auto text-center px-6">
-        <p className="eyebrow mb-5">Freehold</p>
-        <h2 className="display-xl mb-3">Pom PentHouse</h2>
-        <p className="font-display text-5xl text-[var(--gold)]">Freehold</p>
-        <p className="mt-6 opacity-80">Ready to move · Full ownership · Lakeside Road, Pokhara</p>
-        <div className="mt-10 flex flex-wrap gap-3 justify-center">
-          <button onClick={ui.openBooking} className="btn-primary">
-            Book a Stay
-          </button>
-          <a href="#contact" className="btn-ghost text-[var(--sand)]">
-            Purchase Inquiry
-          </a>
-        </div>
-        <p className="mt-6 text-sm opacity-60 accent-italic">
-          Prefer to try before you buy? Book a stay from रू25,500/night.
-        </p>
+    <section className="relative isolate overflow-hidden">
+      <img src={ctaImg} alt="" className="absolute inset-0 size-full object-cover blur-[2px]" loading="lazy" />
+      <div className="absolute inset-0 bg-luxury-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/85 via-luxury-black/55 to-luxury-black/40" />
+      <div className="relative mx-auto max-w-4xl px-6 py-28 text-center text-white sm:py-36">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={stagger}>
+          <motion.div variants={fadeUp} className="mb-5 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.4em] text-gold">
+            <span className="h-px w-8 bg-gold" />Reserve Your Stay<span className="h-px w-8 bg-gold" />
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="font-display text-4xl font-medium leading-tight sm:text-6xl">
+            Ready to Experience <span className="italic text-gold">Premium Living?</span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-xl text-white/75">
+            Book your luxury serviced apartment today. Our team will respond within the hour.
+          </motion.p>
+          <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <button type="button" onClick={openBooking} className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-luxury-black transition hover:brightness-110">
+              Book Now <ArrowRight className="size-4" />
+            </button>
+            <a href="https://wa.me/9779800000000" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.25em] text-white backdrop-blur-md transition hover:bg-white hover:text-luxury-black">
+              <MessageCircle className="size-4" /> WhatsApp Us
+            </a>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

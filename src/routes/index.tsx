@@ -1,49 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Toaster } from "sonner";
 import { Navbar } from "@/components/pom/Navbar";
 import { Hero } from "@/components/pom/Hero";
-import { About } from "@/components/pom/About";
-import { Gallery } from "@/components/pom/Gallery";
-import { Amenities } from "@/components/pom/Amenities";
 import { Residence } from "@/components/pom/Residence";
-import { BookingSection } from "@/components/pom/BookingSection";
-import { Testimonial } from "@/components/pom/Testimonial";
+import { Rooms } from "@/components/pom/Rooms";
+import { WhyChoose } from "@/components/pom/WhyChoose";
+import { Amenities } from "@/components/pom/Amenities";
+import { Lifestyle } from "@/components/pom/Lifestyle";
+import { Gallery } from "@/components/pom/Gallery";
 import { Location } from "@/components/pom/Location";
+import { Testimonial } from "@/components/pom/Testimonial";
+import { LongTerm } from "@/components/pom/LongTerm";
+import { About } from "@/components/pom/About";
 import { Offer } from "@/components/pom/Offer";
 import { FAQ } from "@/components/pom/FAQ";
-import { MapSection } from "@/components/pom/MapSection";
 import { Footer } from "@/components/pom/Footer";
 import { BookingModal } from "@/components/pom/BookingModal";
-import { Lightbox } from "@/components/pom/Lightbox";
 import { FloatingBook, BackToTop } from "@/components/pom/Floating";
+import { Lightbox } from "@/components/pom/Lightbox";
 import { SmoothScroll } from "@/components/pom/SmoothScroll";
+import { Toaster } from "sonner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pom PentHouse — Lakeside Sanctuary, Pokhara, Nepal" },
+      { title: "POM'S Penthouse — Luxury Serviced Apartments in Lakeside, Pokhara" },
       {
         name: "description",
         content:
-          "A luxury penthouse 180m from Phewa Lake, Pokhara. 3 beds, Annapurna views. Book a stay from रू25,500/night.",
+          "Premium serviced apartments in Lakeside, Pokhara. Daily, weekly and monthly stays with hotel comfort and home privacy — overlooking Phewa Lake and the Annapurnas.",
       },
-      { property: "og:title", content: "Pom PentHouse — Pokhara" },
-      { property: "og:description", content: "A Lakeside Sanctuary — Pokhara, Nepal" },
+      { name: "keywords", content: "Pokhara serviced apartments, Lakeside Pokhara accommodation, luxury apartments Nepal, Phewa Lake stay, long-term rental Pokhara, digital nomad Pokhara, penthouse Pokhara" },
+      { property: "og:title", content: "POM'S Penthouse — Luxury Serviced Apartments in Lakeside, Pokhara" },
+      { property: "og:description", content: "Hotel comfort. Home privacy. Designed for modern travelers, families and digital nomads." },
       { property: "og:type", content: "website" },
-      {
-        property: "og:image",
-        content: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
-      },
-      { property: "og:url", content: "/" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "canonical", href: "/" },
-      {
-        rel: "preload",
-        as: "image",
-        href: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1800&q=80&auto=format&fit=crop",
-      },
     ],
   }),
   component: Index,
@@ -51,26 +43,30 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main>
+    <div className="bg-background text-foreground">
       <SmoothScroll />
       <Navbar />
-      <Hero />
-      <About />
-      <Gallery />
-      <Amenities />
-      <Residence />
-      <BookingSection />
-      <Testimonial />
-      <Location />
-      <Offer />
-      <FAQ />
-      <MapSection />
+      <main>
+        <Hero />
+        <Residence />
+        <Rooms />
+        <WhyChoose />
+        <Amenities />
+        <Lifestyle />
+        <Gallery />
+        <Location />
+        <Testimonial />
+        <LongTerm />
+        <About />
+        <Offer />
+        <FAQ />
+      </main>
       <Footer />
-      <BookingModal />
-      <Lightbox />
       <FloatingBook />
       <BackToTop />
+      <BookingModal />
+      <Lightbox />
       <Toaster position="top-center" />
-    </main>
+    </div>
   );
 }

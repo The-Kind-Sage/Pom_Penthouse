@@ -1,28 +1,61 @@
 import { useEffect, useState } from "react";
-import { Moon, Sun, Menu, X } from "lucide-react";
-import { ui } from "@/lib/ui-store";
-import logoUrl from "../../favicon/logo.png?url";
+import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#residence", label: "Residence" },
-  { href: "#location", label: "Location" },
-];
+  ["Home", "#home"], ["Apartments", "#apartments"], ["Amenities", "#amenities"],
+  ["Rooms", "#rooms"], ["Gallery", "#gallery"], ["About", "#about"], ["Contact", "#contact"],
+] as const;
+
+function openBooking() {
+  window.dispatchEvent(new CustomEvent("poms:open-booking"));
+}
+
+function MobileMenu({ scrolled, links }: { scrolled: boolean; links: readonly (readonly [string, string])[] }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="xl:hidden">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`inline-flex flex-col items-center justify-center gap-1 rounded-md p-2 transition ${
+          scrolled ? "text-luxury-black" : "text-white"
+        }`}
+        aria-label="Toggle menu"
+      >
+        <span className={`block h-px w-5 bg-current transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`} />
+        <span className={`block h-px w-5 bg-current transition-opacity ${open ? "opacity-0" : ""}`} />
+        <span className={`block h-px w-5 bg-current transition-transform ${open ? "-translate-y-[3px] -rotate-45" : ""}`} />
+      </button>
+      {open && (
+        <div className="absolute right-4 top-full mt-2 w-52 overflow-hidden rounded-xl border border-border bg-background/95 p-2 shadow-xl backdrop-blur-xl">
+          <nav className="flex flex-col">
+            {links.map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2.5 text-sm text-luxury-black/80 transition hover:bg-muted hover:text-gold"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+          <div className="mt-2 border-t border-border pt-2">
+            <a href="tel:+9779800000000" className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-luxury-black/80 transition hover:bg-muted hover:text-gold">
+              <Phone className="size-4" /> +977 980-000-0000
+            </a>
+            <a href="https://wa.me/9779800000000" target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-luxury-black/80 transition hover:bg-muted hover:text-gold">
+              <MessageCircle className="size-4" /> WhatsApp
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    const stored = localStorage.getItem("pom-theme") as "light" | "dark" | null;
-    const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    const next = stored ?? prefers;
-    setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
-  }, []);
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -30,92 +63,62 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => {
-    const next = theme === "light" ? "dark" : "light";
-    setTheme(next);
-    localStorage.setItem("pom-theme", next);
-    document.documentElement.setAttribute("data-theme", next);
-  };
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-3 border-b" : "py-5 border-b border-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/85 backdrop-blur-xl border-b border-border shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]"
+          : "bg-transparent"
       }`}
-      style={{
-        background: scrolled ? "color-mix(in srgb, var(--paper) 78%, transparent)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-      }}
     >
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-12 flex items-center justify-between">
-        <a
-          href="#top"
-          className="flex items-center"
-          aria-label="Pom PentHouse home"
-        >
-          <img src={logoUrl} alt="Pom PentHouse" className="h-14 w-auto" />
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
+        <a href="#home" className={`flex shrink-0 items-center gap-2 ${scrolled ? "text-luxury-black" : "text-white"}`}>
+          <span className="font-display text-2xl font-bold tracking-tight">POM&apos;S</span>
+          <span className="hidden text-[10px] uppercase tracking-[0.3em] opacity-70 sm:inline">Penthouse</span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-9 text-sm">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} className="link-underline opacity-80 hover:opacity-100">
-              {l.label}
+        <nav className={`hidden items-center gap-5 text-[13px] xl:flex ${scrolled ? "text-luxury-black/80" : "text-white/85"}`}>
+          {links.map(([label, href]) => (
+            <a key={href} href={href} className="relative whitespace-nowrap transition hover:text-gold after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all hover:after:w-full">
+              {label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition"
-            aria-label="Toggle theme"
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <a
+            href="tel:+9779800000000"
+            className={`hidden items-center gap-1.5 whitespace-nowrap text-xs font-medium transition lg:inline-flex ${
+              scrolled ? "text-luxury-black hover:text-gold" : "text-white hover:text-gold"
+            }`}
           >
-            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
-          <button
-            onClick={ui.openBooking}
-            className="hidden md:inline-flex btn-ghost !py-2.5 !px-5 text-sm"
+            <Phone className="size-3.5 shrink-0" />
+            <span className="hidden xl:inline">+977 980-000-0000</span>
+            <span className="xl:hidden">Call</span>
+          </a>
+          <a
+            href="https://wa.me/9779800000000"
+            target="_blank" rel="noreferrer"
+            className={`hidden items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-xs font-medium transition sm:inline-flex ${
+              scrolled
+                ? "border-luxury-black/15 text-luxury-black hover:border-gold hover:text-gold"
+                : "border-white/30 text-white hover:border-gold hover:text-gold"
+            }`}
           >
-            Book a Stay
+            <MessageCircle className="size-3.5 shrink-0" />
+            <span className="hidden sm:inline">WhatsApp</span>
+          </a>
+          <button
+            type="button"
+            onClick={openBooking}
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-gold px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-luxury-black transition hover:brightness-110"
+          >
+            Book Now <ArrowRight className="size-3.5 shrink-0" />
           </button>
-          <button className="md:hidden p-2" onClick={() => setOpen(true)} aria-label="Open menu">
-            <Menu size={22} />
-          </button>
+
+          <MobileMenu scrolled={scrolled} links={links} />
         </div>
       </div>
-
-      {open && (
-        <div className="fixed inset-0 z-[60] bg-[var(--paper)] flex flex-col">
-          <div className="flex justify-between items-center px-6 py-5 border-b">
-            <img src={logoUrl} alt="Pom" className="h-12 w-auto" />
-            <button onClick={() => setOpen(false)} aria-label="Close menu">
-              <X size={24} />
-            </button>
-          </div>
-          <nav className="flex-1 flex flex-col items-center justify-center gap-8">
-            {links.map((l, i) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="font-display text-3xl md:text-4xl animate-[fade-in_0.5s_ease-out_both]"
-                style={{ animationDelay: `${i * 0.05}s` }}
-              >
-                {l.label}
-              </a>
-            ))}
-            <button
-              onClick={() => {
-                setOpen(false);
-                ui.openBooking();
-              }}
-              className="btn-primary mt-6"
-            >
-              Book a Stay
-            </button>
-          </nav>
-        </div>
-      )}
     </header>
   );
 }

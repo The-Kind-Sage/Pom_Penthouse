@@ -1,87 +1,76 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { photo } from "@/lib/images";
+import { motion } from "framer-motion";
+import { MapPin } from "lucide-react";
 
-function LiquidSmooth({ p }: { p: ReturnType<typeof photo> }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.3 });
+const fadeUp = { hidden: { opacity: 0, y: 32 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
+
+const NEARBY = [
+  ["Phewa Lake", "200 m"], ["Lakeside Market", "350 m"],
+  ["Tal Barahi Temple", "1.2 km"], ["Restaurants & Cafes", "300 m"],
+  ["Sarangkot Viewpoint", "12 km"], ["Pokhara Airport", "4 km"],
+];
+
+function SectionEyebrow({ label, title, kicker, light = false }: { label: string; title: React.ReactNode; kicker?: string; light?: boolean }) {
   return (
-    <div
-      ref={ref}
-      className="group relative aspect-[4/3] rounded-[28px] overflow-hidden shadow-[var(--shadow-soft)]"
+    <motion.div
+      initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} variants={stagger}
+      className="mx-auto max-w-3xl text-center"
     >
-      <svg className="absolute w-0 h-0" aria-hidden>
-        <defs>
-          <clipPath id={`blob-${p.id}`} clipPathUnits="objectBoundingBox">
-            <motion.path
-              initial={{ d: "M0,0 L1,0 L1,1 L0,1 Z" }}
-              animate={
-                inView
-                  ? {
-                      d: [
-                        "M0,0 L1,0 L1,1 L0,1 Z",
-                        "M0.02,0.05 C0.3,-0.02 0.7,0.02 1,0.04 L0.98,0.95 C0.7,1.02 0.3,0.98 0.02,0.96 Z",
-                        "M0,0 L1,0 L1,1 L0,1 Z",
-                      ],
-                    }
-                  : {}
-              }
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            />
-          </clipPath>
-          <filter id={`turb-${p.id}`}>
-            <feTurbulence
-              type="fractalNoise"
-              numOctaves={2}
-              baseFrequency={inView ? 0.024 : 0.012}
-            />
-            <feDisplacementMap in="SourceGraphic" scale="4" />
-          </filter>
-        </defs>
-      </svg>
-      <img
-        src={p.src}
-        alt={p.alt}
-        loading="lazy"
-        decoding="async"
-        className="object-cover w-full h-full"
-        style={{ clipPath: `url(#blob-${p.id})` }}
-      />
-    </div>
+      <motion.div variants={fadeUp} className={`mb-4 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.4em] ${light ? "text-gold" : "text-gold"}`}>
+        <span className="h-px w-8 bg-gold" />{label}<span className="h-px w-8 bg-gold" />
+      </motion.div>
+      <motion.h2 variants={fadeUp} className={`font-display text-4xl font-medium leading-tight sm:text-5xl ${light ? "text-white" : "text-luxury-black"}`}>
+        {title}
+      </motion.h2>
+      {kicker && (
+        <motion.p variants={fadeUp} className={`mt-5 text-base ${light ? "text-white/70" : "text-muted-foreground"}`}>
+          {kicker}
+        </motion.p>
+      )}
+    </motion.div>
   );
 }
 
 export function Location() {
   return (
-    <section id="location" className="py-24 md:py-40">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        {/* Photo 19/20 — Liquid Smooth */}
-        <LiquidSmooth p={photo(19)} />
-        <div>
-          <p className="eyebrow mb-5">Pokhara Lakeside</p>
-          <h2 className="h1-lux">180 meters to the water.</h2>
-          <p className="mt-6 opacity-85 max-w-lg">
-            Four minute walk to Lakeside Street. Cafés, boats, yoga. Twenty-five minutes to Pokhara
-            International Airport. Annapurna trailheads one hour north.
-          </p>
-          <ul className="mt-8 space-y-3 text-sm">
-            <li>📍 180m Phewa Lake</li>
-            <li>☕ 4 min Lakeside Street</li>
-            <li>✈ 25 min PKR Airport</li>
-            <li>⛰ Annapurna views</li>
-          </ul>
-          <p className="mt-8 accent-italic text-xl text-[var(--gold)]">
-            Lakeside Road, Pokhara 33700, Nepal
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-20 max-w-4xl mx-auto px-6">
-        <p className="eyebrow text-center mb-6">Around Pom</p>
-        <div className="grid md:grid-cols-3 gap-8 text-center opacity-85 text-sm">
-          <div>Boats at dawn — Phewa Lake, 3 min</div>
-          <div>Himalayan Java — espresso, 5 min</div>
-          <div>World Peace Pagoda — hike 40 min</div>
+    <section id="location" className="bg-luxury-black py-24 text-white sm:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionEyebrow
+          light
+          label="The Location"
+          title={<>Lakeside, <span className="italic text-gold">Pokhara</span></>}
+          kicker="Tucked between the lake and the mountains — moments from the city's best dining, boating and trails."
+        />
+        <div className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9 }}
+            className="relative overflow-hidden border border-white/10"
+          >
+            <iframe
+              title="POM'S Penthouse — Lakeside, Pokhara"
+              src="https://www.google.com/maps?q=Lakeside,+Pokhara,+Nepal&output=embed"
+              className="aspect-[4/3] w-full grayscale invert-[0.92] hue-rotate-180"
+              loading="lazy"
+            />
+          </motion.div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+            <motion.h3 variants={fadeUp} className="font-display text-3xl text-white sm:text-4xl">Nearby Attractions</motion.h3>
+            <motion.p variants={fadeUp} className="mt-4 max-w-lg text-white/65">
+              Step out of the building and you're already where everyone else came to be.
+            </motion.p>
+            <motion.ul variants={stagger} className="mt-8 divide-y divide-white/10 border-y border-white/10">
+              {NEARBY.map(([name, dist]) => (
+                <motion.li key={name} variants={fadeUp} className="flex items-center justify-between py-5">
+                  <div className="flex items-center gap-4">
+                    <MapPin className="size-4 text-gold" />
+                    <span className="font-display text-lg">{name}</span>
+                  </div>
+                  <span className="rounded-full border border-gold/40 px-3 py-1 text-xs text-gold">{dist}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,96 +1,54 @@
-import { useState } from "react";
-import { toast } from "sonner";
-import { ui } from "@/lib/ui-store";
+import { Instagram, Facebook, MessageCircle, MapPin, Phone, Mail, Mountain } from "lucide-react";
 
 export function Footer() {
-  const [loading, setLoading] = useState(false);
-
-  const handleContact = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const fd = new FormData(form);
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: fd.get("name"),
-          email: fd.get("email"),
-          message: fd.get("message"),
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to send");
-      toast.success("Message sent. We'll reply within 12h.");
-      form.reset();
-    } catch (err: any) {
-      toast.error(err?.message || "Failed to send message");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <footer id="contact" className="border-t py-24">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-12 grid lg:grid-cols-2 gap-10 lg:gap-16">
-        <form onSubmit={handleContact} className="space-y-4">
-          <p className="eyebrow mb-2">Contact</p>
-          <h2 className="h2-lux mb-6">Write to Pom</h2>
-          <input
-            required
-            name="name"
-            placeholder="Name"
-            className="w-full rounded-xl border px-4 py-3.5 bg-transparent focus:ring-2 focus:ring-[var(--gold)] outline-none transition"
-          />
-          <input
-            required
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="w-full rounded-xl border px-4 py-3.5 bg-transparent focus:ring-2 focus:ring-[var(--gold)] outline-none transition"
-          />
-          <textarea
-            required
-            name="message"
-            rows={5}
-            placeholder="Tell us about your stay or purchase interest…"
-            className="w-full rounded-xl border px-4 py-3.5 bg-transparent focus:ring-2 focus:ring-[var(--gold)] outline-none transition resize-none"
-          />
-          <button type="submit" disabled={loading} className="btn-primary w-full justify-center mt-2 disabled:opacity-50">
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-
+    <footer className="bg-luxury-black pt-20 pb-10 text-white/70">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-4">
         <div>
-          <div className="font-display text-3xl">Pom PentHouse</div>
-          <p className="mt-4 opacity-80 leading-relaxed">
-            Lakeside Road
-            <br />
-            Pokhara 33700, Nepal
-            <br />
-            hello@pompenthouse.np
-            <br />
-            +977 61-XXXXXX
+          <div className="flex items-baseline gap-2 text-white">
+            <span className="font-display text-2xl font-bold">POM&apos;S</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-gold">Penthouse</span>
+          </div>
+          <p className="mt-5 text-sm leading-relaxed">
+            Luxury serviced apartments in Lakeside, Pokhara — hotel comfort with home privacy.
           </p>
-          <div className="mt-6 flex flex-wrap gap-5 text-sm">
-            <a className="link-underline" href="#">
-              Instagram
-            </a>
-            <a className="link-underline" href="#">
-              Airbnb
-            </a>
-            <button onClick={ui.openBooking} className="link-underline">
-              Check availability →
-            </button>
+          <div className="mt-6 flex gap-3">
+            {[Instagram, Facebook, MessageCircle].map((Icon, idx) => (
+              <a key={idx} href="#" className="grid size-9 place-items-center rounded-full border border-white/15 transition hover:border-gold hover:text-gold">
+                <Icon className="size-4" />
+              </a>
+            ))}
           </div>
         </div>
+        <div>
+          <h4 className="font-display text-sm uppercase tracking-[0.3em] text-gold">Explore</h4>
+          <ul className="mt-5 space-y-3 text-sm">
+            {["Apartments", "Amenities", "Gallery", "About", "Contact"].map((l) => (
+              <li key={l}><a href={`#${l.toLowerCase()}`} className="transition hover:text-gold">{l}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-display text-sm uppercase tracking-[0.3em] text-gold">Residences</h4>
+          <ul className="mt-5 space-y-3 text-sm">
+            {["Deluxe Studio", "Executive Suite", "Family Apartment", "Penthouse Suite"].map((a) => (
+              <li key={a}><a href="#apartments" className="transition hover:text-gold">{a}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-display text-sm uppercase tracking-[0.3em] text-gold">Contact</h4>
+          <ul className="mt-5 space-y-3 text-sm">
+            <li className="flex gap-3"><MapPin className="mt-0.5 size-4 text-gold" /> Lakeside, Pokhara, Nepal</li>
+            <li className="flex gap-3"><Phone className="mt-0.5 size-4 text-gold" /> +977 980-000-0000</li>
+            <li className="flex gap-3"><Mail className="mt-0.5 size-4 text-gold" /> stay@pomspenthouse.com</li>
+            <li className="flex gap-3"><Mountain className="mt-0.5 size-4 text-gold" /> Views of Phewa & Annapurna</li>
+          </ul>
+        </div>
       </div>
-
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-12 mt-16 pt-8 border-t text-sm opacity-60 flex justify-between flex-wrap gap-3">
-        <span>© 2026 Pom PentHouse · Designed in Pokhara</span>
-        <span>hello@pompenthouse.np</span>
+      <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 pt-6 text-xs text-white/40 sm:flex-row">
+        <span>&copy; {new Date().getFullYear()} POM&apos;S Penthouse. All rights reserved.</span>
+        <span>Crafted with care in Pokhara, Nepal.</span>
       </div>
     </footer>
   );

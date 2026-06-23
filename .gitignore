@@ -18,6 +18,9 @@ dist-ssr
 .nitro
 *.local
 
+# pom project folder (separate repo)
+pom/
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
