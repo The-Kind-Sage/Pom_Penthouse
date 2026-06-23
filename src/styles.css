@@ -131,6 +131,7 @@
   ::selection { background: var(--gold); color: var(--luxury-black); }
   :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
   [data-theme="dark"] .text-luxury-black { color: var(--foreground); }
+  [data-theme="dark"] [class*="text-luxury-black"] { color: var(--foreground); }
   [data-theme="dark"] .bg-muted { background-color: var(--card); }
 }
 
