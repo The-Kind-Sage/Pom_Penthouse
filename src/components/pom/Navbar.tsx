@@ -35,7 +35,7 @@ function MobileMenu({ scrolled, links }: { scrolled: boolean; links: readonly (r
               <Link
                 key={href}
                 to={href}
-                onClick={() => setOpen(false)}
+                onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className="rounded-lg px-3 py-2.5 text-sm text-luxury-black/80 transition hover:bg-muted hover:text-gold"
               >
                 {label}
@@ -90,13 +90,13 @@ export function Navbar({ transparent = true }: { transparent?: boolean }) {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
-        <Link to="/" className="flex flex-1 items-center">
+        <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex flex-1 items-center">
           <img src={logoUrl} alt="POM'S Penthouse" className="h-16 w-auto" />
         </Link>
 
         <nav className={`hidden xl:flex flex-1 items-center justify-center gap-5 text-[13px] ${solid ? "text-luxury-black/80" : "text-white/85"}`}>
           {links.map(([label, href]) => (
-            <Link key={href} to={href} className="relative whitespace-nowrap transition hover:text-gold after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all hover:after:w-full">
+            <Link key={href} to={href} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="relative whitespace-nowrap transition hover:text-gold after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all hover:after:w-full">
               {label}
             </Link>
           ))}
