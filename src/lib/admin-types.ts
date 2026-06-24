@@ -86,6 +86,18 @@ export interface ContactMessage {
   created_at: string;
 }
 
+export interface Room {
+  id: string;
+  floor: number;
+  number: number;
+  label: string;
+  type: string;
+  status: "available" | "booked";
+  guest_name?: string;
+  check_in?: string;
+  check_out?: string;
+}
+
 // Legacy aliases (used by some pages)
 export type PenthouseStatusLegacy = PenthouseStatus;
 export type BookingStatusLegacy = BookingStatus;

@@ -15,6 +15,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ApiUsersRouteImport } from './routes/api/users'
 import { Route as ApiUploadRouteImport } from './routes/api/upload'
 import { Route as ApiSettingsRouteImport } from './routes/api/settings'
+import { Route as ApiRoomsRouteImport } from './routes/api/rooms'
 import { Route as ApiPenthousesRouteImport } from './routes/api/penthouses'
 import { Route as ApiContactMessagesRouteImport } from './routes/api/contact-messages'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
@@ -26,6 +27,7 @@ import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminPenthousesRouteImport } from './routes/admin.penthouses'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminBuildingRouteImport } from './routes/admin.building'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
@@ -60,6 +62,11 @@ const ApiUploadRoute = ApiUploadRouteImport.update({
 const ApiSettingsRoute = ApiSettingsRouteImport.update({
   id: '/api/settings',
   path: '/api/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRoomsRoute = ApiRoomsRouteImport.update({
+  id: '/api/rooms',
+  path: '/api/rooms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPenthousesRoute = ApiPenthousesRouteImport.update({
@@ -117,6 +124,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminBuildingRoute = AdminBuildingRouteImport.update({
+  id: '/building',
+  path: '/building',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBookingsRoute = AdminBookingsRouteImport.update({
   id: '/bookings',
   path: '/bookings',
@@ -148,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/building': typeof AdminBuildingRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/penthouses': typeof AdminPenthousesRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -159,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/api/contact': typeof ApiContactRoute
   '/api/contact-messages': typeof ApiContactMessagesRoute
   '/api/penthouses': typeof ApiPenthousesRoute
+  '/api/rooms': typeof ApiRoomsRoute
   '/api/settings': typeof ApiSettingsRoute
   '/api/upload': typeof ApiUploadRoute
   '/api/users': typeof ApiUsersRoute
@@ -171,6 +185,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/building': typeof AdminBuildingRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/penthouses': typeof AdminPenthousesRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -182,6 +197,7 @@ export interface FileRoutesByTo {
   '/api/contact': typeof ApiContactRoute
   '/api/contact-messages': typeof ApiContactMessagesRoute
   '/api/penthouses': typeof ApiPenthousesRoute
+  '/api/rooms': typeof ApiRoomsRoute
   '/api/settings': typeof ApiSettingsRoute
   '/api/upload': typeof ApiUploadRoute
   '/api/users': typeof ApiUsersRoute
@@ -196,6 +212,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/building': typeof AdminBuildingRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/penthouses': typeof AdminPenthousesRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -207,6 +224,7 @@ export interface FileRoutesById {
   '/api/contact': typeof ApiContactRoute
   '/api/contact-messages': typeof ApiContactMessagesRoute
   '/api/penthouses': typeof ApiPenthousesRoute
+  '/api/rooms': typeof ApiRoomsRoute
   '/api/settings': typeof ApiSettingsRoute
   '/api/upload': typeof ApiUploadRoute
   '/api/users': typeof ApiUsersRoute
@@ -222,6 +240,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin/analytics'
     | '/admin/bookings'
+    | '/admin/building'
     | '/admin/login'
     | '/admin/penthouses'
     | '/admin/settings'
@@ -233,6 +252,7 @@ export interface FileRouteTypes {
     | '/api/contact'
     | '/api/contact-messages'
     | '/api/penthouses'
+    | '/api/rooms'
     | '/api/settings'
     | '/api/upload'
     | '/api/users'
@@ -245,6 +265,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin/analytics'
     | '/admin/bookings'
+    | '/admin/building'
     | '/admin/login'
     | '/admin/penthouses'
     | '/admin/settings'
@@ -256,6 +277,7 @@ export interface FileRouteTypes {
     | '/api/contact'
     | '/api/contact-messages'
     | '/api/penthouses'
+    | '/api/rooms'
     | '/api/settings'
     | '/api/upload'
     | '/api/users'
@@ -269,6 +291,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin/analytics'
     | '/admin/bookings'
+    | '/admin/building'
     | '/admin/login'
     | '/admin/penthouses'
     | '/admin/settings'
@@ -280,6 +303,7 @@ export interface FileRouteTypes {
     | '/api/contact'
     | '/api/contact-messages'
     | '/api/penthouses'
+    | '/api/rooms'
     | '/api/settings'
     | '/api/upload'
     | '/api/users'
@@ -299,6 +323,7 @@ export interface RootRouteChildren {
   ApiContactRoute: typeof ApiContactRoute
   ApiContactMessagesRoute: typeof ApiContactMessagesRoute
   ApiPenthousesRoute: typeof ApiPenthousesRoute
+  ApiRoomsRoute: typeof ApiRoomsRoute
   ApiSettingsRoute: typeof ApiSettingsRoute
   ApiUploadRoute: typeof ApiUploadRoute
   ApiUsersRoute: typeof ApiUsersRoute
@@ -349,6 +374,13 @@ declare module '@tanstack/react-router' {
       path: '/api/settings'
       fullPath: '/api/settings'
       preLoaderRoute: typeof ApiSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/rooms': {
+      id: '/api/rooms'
+      path: '/api/rooms'
+      fullPath: '/api/rooms'
+      preLoaderRoute: typeof ApiRoomsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/penthouses': {
@@ -428,6 +460,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/building': {
+      id: '/admin/building'
+      path: '/building'
+      fullPath: '/admin/building'
+      preLoaderRoute: typeof AdminBuildingRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/bookings': {
       id: '/admin/bookings'
       path: '/bookings'
@@ -469,6 +508,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   AdminBookingsRoute: typeof AdminBookingsRoute
+  AdminBuildingRoute: typeof AdminBuildingRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminPenthousesRoute: typeof AdminPenthousesRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
@@ -479,6 +519,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   AdminBookingsRoute: AdminBookingsRoute,
+  AdminBuildingRoute: AdminBuildingRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminPenthousesRoute: AdminPenthousesRoute,
   AdminSettingsRoute: AdminSettingsRoute,
@@ -498,6 +539,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiContactRoute: ApiContactRoute,
   ApiContactMessagesRoute: ApiContactMessagesRoute,
   ApiPenthousesRoute: ApiPenthousesRoute,
+  ApiRoomsRoute: ApiRoomsRoute,
   ApiSettingsRoute: ApiSettingsRoute,
   ApiUploadRoute: ApiUploadRoute,
   ApiUsersRoute: ApiUsersRoute,

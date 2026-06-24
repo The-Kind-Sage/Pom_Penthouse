@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Penthouse, Booking, BookingInquiry, User, Activity, Setting } from "@/lib/admin-types";
+import type { Penthouse, Booking, BookingInquiry, Room, User, Activity, Setting } from "@/lib/admin-types";
 import { adminStore } from "@/lib/admin-store";
 
 async function apiGet<T>(url: string): Promise<T> {
@@ -99,6 +99,26 @@ export function useBookingInquiries() {
   return useQuery<BookingInquiry[]>({
     queryKey: ["booking-inquiries"],
     queryFn: () => apiGet("/api/booking-inquiries"),
+  });
+}
+
+// ============================================
+// ROOM HOOKS
+// ============================================
+
+export function useRooms() {
+  return useQuery<Room[]>({
+    queryKey: ["rooms"],
+    queryFn: () => apiGet("/api/rooms"),
+  });
+}
+
+export function useUpdateRoom() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (data: any) =>
+      apiMutate("/api/rooms", { method: "POST", body: JSON.stringify(data) }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["rooms"] }),
   });
 }
 
