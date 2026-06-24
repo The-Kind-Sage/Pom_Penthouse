@@ -154,7 +154,7 @@ async function seed() {
       title: "Ready to Experience Premium Living?",
       subtitle: "Book your luxury serviced apartment today. Our team will respond within the hour.",
       btn_text: "Book Now",
-      image: "/images/4.jpeg",
+      image: "/images/gal-lake.jpg",
     }},
     { key: "testimonial_settings", value: {
       title: "Loved by guests worldwide",
