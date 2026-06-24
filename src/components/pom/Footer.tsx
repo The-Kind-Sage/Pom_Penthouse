@@ -1,14 +1,14 @@
 import { Instagram, Facebook, MessageCircle, MapPin, Phone, Mail, Mountain } from "lucide-react";
+import logoUrl from "../../favicon/logo.png?url";
 
 export function Footer() {
   return (
     <footer className="bg-luxury-black pt-20 pb-10 text-white/70">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-4">
         <div>
-          <div className="flex items-baseline gap-2 text-white">
-            <span className="font-display text-2xl font-bold">POM&apos;S</span>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-gold">Penthouse</span>
-          </div>
+          <a href="/" className="block">
+            <img src={logoUrl} alt="POM'S Penthouse" className="h-24 w-auto" />
+          </a>
           <p className="mt-5 text-sm leading-relaxed">
             Luxury serviced apartments in Lakeside, Pokhara — hotel comfort with home privacy.
           </p>
