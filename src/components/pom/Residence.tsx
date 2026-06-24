@@ -43,7 +43,13 @@ export function Residence() {
               className="group flex flex-col overflow-hidden border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-25px_rgba(17,17,17,0.35)]"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={a.images?.[0] || a.image || ""} alt={a.name} loading="lazy" className="size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
+                <img 
+                  src={a.images?.[0] || a.image || ""} 
+                  alt={a.name} 
+                  loading="lazy" 
+                  decoding="async"
+                  className="size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/75 via-luxury-black/10 to-transparent" />
                 <span className="absolute left-4 top-4 rounded-full bg-luxury-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur-md">
                   {a.capacity}

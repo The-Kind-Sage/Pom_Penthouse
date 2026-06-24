@@ -20,8 +20,9 @@ export const Route = createFileRoute("/api/upload")({
             });
           }
 
-          if (file.size > 10 * 1024 * 1024) {
-            return new Response(JSON.stringify({ success: false, error: "File too large (max 10MB)" }), {
+          // Reduce max file size to 2MB for faster loading
+          if (file.size > 2 * 1024 * 1024) {
+            return new Response(JSON.stringify({ success: false, error: "File too large (max 2MB). Please compress your image first." }), {
               status: 400,
               headers: { "Content-Type": "application/json" },
             });
