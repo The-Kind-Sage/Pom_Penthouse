@@ -15,6 +15,7 @@ import { Offer } from "@/components/pom/Offer";
 import { FAQ } from "@/components/pom/FAQ";
 
 export const Route = createFileRoute("/")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "POM'S Penthouse — Luxury Serviced Apartments in Lakeside, Pokhara" },
