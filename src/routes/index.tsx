@@ -45,7 +45,7 @@ function Index() {
       <WhyChoose />
       <Amenities />
       <Lifestyle />
-      <Gallery />
+      <Gallery preview />
       <Location />
       <Testimonial />
       <LongTerm />
