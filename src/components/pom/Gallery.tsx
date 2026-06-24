@@ -52,7 +52,7 @@ export function Gallery({ preview: isPreview }: { preview?: boolean }) {
   }));
 
   const GALLERY = remoteGallery.length > 0 ? remoteGallery : localGallery;
-  const displayed = isPreview ? GALLERY.slice(0, 6) : GALLERY;
+  const displayed = isPreview ? GALLERY.slice(0, 15) : GALLERY;
 
   const open = useCallback((i: number) => { setActiveIdx(i); setLightboxOpen(true); }, []);
   const close = useCallback(() => setLightboxOpen(false), []);
