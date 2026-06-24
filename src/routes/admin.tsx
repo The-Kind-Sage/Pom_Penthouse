@@ -4,7 +4,7 @@ import { useAdmin, adminStore } from "@/lib/admin-store";
 import {
   LayoutDashboard, CalendarCheck, Users, BarChart3, Settings,
   ChevronLeft, ChevronRight, Bell, Search, Moon, Sun, LogOut, User,
-  Menu, LayoutGrid, MessageSquare, Building2,
+  Menu, LayoutGrid, MessageSquare, Building2, ImageIcon,
 } from "lucide-react";
 import logoUrl from "../favicon/logo.png?url";
 
@@ -14,6 +14,7 @@ const navItems = [
   { to: "/admin/inquiries", label: "Inquiries", icon: MessageSquare },
   { to: "/admin/building", label: "Building", icon: LayoutGrid },
   { to: "/admin/penthouses", label: "Penthouses", icon: Building2 },
+  { to: "/admin/gallery", label: "Gallery", icon: ImageIcon },
   { to: "/admin/users", label: "Users", icon: Users },
   { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   { to: "/admin/settings", label: "Settings", icon: Settings },
