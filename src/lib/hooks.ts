@@ -219,6 +219,46 @@ export function useMarkContactRead() {
   });
 }
 
+// ============================================
+// ROOM CONFIG HOOKS
+// ============================================
+
+export function useRoomConfig() {
+  return useQuery({
+    queryKey: ["room-config"],
+    queryFn: async () => {
+      const rooms = await apiGet<{ floor: number; number: number; label: string; type: string }[]>("/api/rooms");
+      // Extract unique floor/label/type config from room list
+      const config = rooms.map((r) => ({ floor: r.floor, number: r.number, label: r.label, type: r.type }));
+      return config;
+    },
+  });
+}
+
+export function useUpdateRoomConfig() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (config: { floor: number; number: number; label: string; type: string }[]) =>
+      apiMutate("/api/rooms", { method: "PUT", body: JSON.stringify({ config }) }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["rooms"] });
+      qc.invalidateQueries({ queryKey: ["room-config"] });
+    },
+  });
+}
+
+export function useDeleteRoomFromConfig() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (label: string) =>
+      apiMutate("/api/rooms", { method: "DELETE", body: JSON.stringify({ label }) }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["rooms"] });
+      qc.invalidateQueries({ queryKey: ["room-config"] });
+    },
+  });
+}
+
 // Gallery images
 export function useGalleryImages() {
   return useQuery<{ url: string; label: string; created_at: string }[]>({
