@@ -107,18 +107,19 @@ export const Route = createFileRoute("/api/booking-whatsapp")({
             }
           }
 
-          let emailSent = false;
+          let emailResult = { sent: false, reason: "not attempted" };
           try {
-            emailSent = await sendBookingNotification(body);
+            emailResult = await sendBookingNotification(body);
           } catch (err) {
             console.error("[Email] Unexpected error:", err);
+            emailResult = { sent: false, reason: String(err) };
           }
 
           return json({
             success: true,
             whatsapp_sent: whatsappSent,
             whatsapp_configured: !!(token && phoneNumberId),
-            email_sent: emailSent,
+            email: emailResult,
             id: result.insertedId.toString(),
           }, 201);
         } catch (err: any) {
