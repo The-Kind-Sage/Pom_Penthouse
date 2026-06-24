@@ -52,7 +52,11 @@ export function Gallery({ preview: isPreview }: { preview?: boolean }) {
   }));
 
   const GALLERY = remoteGallery.length > 0 ? remoteGallery : localGallery;
-  const displayed = isPreview ? GALLERY.slice(0, 15) : GALLERY;
+  const displayed = isPreview
+    ? (GALLERY.length >= 23
+        ? [...GALLERY.slice(0, 12), GALLERY[20], GALLERY[21], GALLERY[22]]
+        : GALLERY.slice(0, 15))
+    : GALLERY;
 
   const open = useCallback((i: number) => { setActiveIdx(i); setLightboxOpen(true); }, []);
   const close = useCallback(() => setLightboxOpen(false), []);
@@ -88,7 +92,7 @@ export function Gallery({ preview: isPreview }: { preview?: boolean }) {
           {displayed.map((g, i) => (
             <motion.figure
               key={`${g.src}-${i}`} variants={item}
-              className={`group relative cursor-pointer overflow-hidden rounded-sm bg-muted ${g.span} ${isPreview && i >= 12 ? "col-span-2" : ""}`}
+              className={`group relative cursor-pointer overflow-hidden rounded-sm bg-muted ${isPreview && i >= 12 ? "col-span-2" : g.span}`}
               onClick={() => open(i)}
             >
               <img
