@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -76,28 +76,29 @@ export function BookingModal() {
   const vatNpr = vatUsd * rate;
   const totalNpr = totalUsd * rate;
 
-  const prevent = (e: Event) => e.preventDefault();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-      document.addEventListener("wheel", prevent, { passive: false, capture: true });
-      document.addEventListener("touchmove", prevent, { passive: false, capture: true });
-      window.__lenis?.stop();
-      return () => {
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
-        document.removeEventListener("wheel", prevent, { capture: true });
-        document.removeEventListener("touchmove", prevent, { capture: true });
-        window.__lenis?.start();
-      };
+    if (!open) return;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    window.__lenis?.stop();
+
+    function blockBg(e: Event) {
+      if (scrollRef.current?.contains(e.target as Node)) return;
+      e.preventDefault();
     }
-    document.body.style.overflow = "";
-    document.documentElement.style.overflow = "";
+
+    document.addEventListener("wheel", blockBg, { passive: false });
+    document.addEventListener("touchmove", blockBg, { passive: false });
+
     return () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+      document.removeEventListener("wheel", blockBg);
+      document.removeEventListener("touchmove", blockBg);
+      window.__lenis?.start();
     };
   }, [open]);
 
@@ -203,7 +204,7 @@ export function BookingModal() {
             </div>
 
             {/* Scrollable body */}
-            <div className="scrollbar-thin flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6">
+            <div ref={scrollRef} className="scrollbar-thin flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6">
               {/* Form grid */}
               <div className="grid gap-x-4 gap-y-4 sm:grid-cols-2">
                 <Field label="Full Name *">
