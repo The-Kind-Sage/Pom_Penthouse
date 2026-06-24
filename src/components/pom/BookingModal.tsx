@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ArrowRight, CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
+import { ArrowRight, CalendarIcon, ShieldCheck, Info } from "lucide-react";
+import { format, differenceInCalendarDays } from "date-fns";
 import { cn } from "@/lib/utils";
 import { showToast } from "@/components/ui/toast";
 import aptStudio from "@/assets/apt-studio.jpg";
@@ -14,20 +14,26 @@ import aptExec from "@/assets/apt-executive.jpg";
 import aptFamily from "@/assets/apt-family.jpg";
 import aptPent from "@/assets/apt-penthouse.jpg";
 
+const USD_TO_NPR_FALLBACK = 134.5;
+const VAT_RATE = 0.13;
+
 const APARTMENTS = [
-  { name: "3 BHK", price: "$150", img: aptPent },
-  { name: "2 BHK", price: "$110", img: aptFamily },
-  { name: "1 BHK", price: "$75", img: aptExec },
-  { name: "Studio Apartment", price: "$55", img: aptStudio },
+  { name: "3 BHK", priceUsd: 150, img: aptPent },
+  { name: "2 BHK", priceUsd: 110, img: aptFamily },
+  { name: "1 BHK", priceUsd: 75, img: aptExec },
+  { name: "Studio Apartment", priceUsd: 55, img: aptStudio },
 ];
 
 const ROOMS = [
-  { name: "Single Room — Single Bed", price: "$30", img: aptExec },
-  { name: "Single Room — Double Bed", price: "$40", img: aptStudio },
-  { name: "Single Room — Twin Bed", price: "$45", img: aptFamily },
+  { name: "Single Room — Single Bed", priceUsd: 30, img: aptExec },
+  { name: "Single Room — Double Bed", priceUsd: 40, img: aptStudio },
+  { name: "Single Room — Twin Bed", priceUsd: 45, img: aptFamily },
 ];
 
 const ALL_OPTIONS = [...APARTMENTS, ...ROOMS];
+
+function fmtUsd(n: number) { return `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; }
+function fmtNpr(n: number) { return `रू${Math.round(n).toLocaleString("en-US")}`; }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -40,6 +46,35 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 export function BookingModal() {
   const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({
+    name: "", email: "", phone: "", checkin: "", checkout: "",
+    guests: "2", apartment: "Studio Apartment", message: "",
+  });
+  const [checkinDate, setCheckinDate] = useState<Date>();
+  const [checkoutDate, setCheckoutDate] = useState<Date>();
+  const [submitting, setSubmitting] = useState(false);
+  const [rate, setRate] = useState(USD_TO_NPR_FALLBACK);
+
+  useEffect(() => {
+    fetch("https://open.er-api.com/v6/latest/USD")
+      .then((r) => r.json())
+      .then((d) => { if (d?.rates?.NPR) setRate(d.rates.NPR); })
+      .catch(() => {});
+  }, []);
+
+  const selected = ALL_OPTIONS.find((o) => o.name === form.apartment) ?? ALL_OPTIONS[0];
+
+  const nights = useMemo(() => {
+    if (!checkinDate || !checkoutDate) return 0;
+    return differenceInCalendarDays(checkoutDate, checkinDate);
+  }, [checkinDate, checkoutDate]);
+
+  const subtotalUsd = selected.priceUsd * nights;
+  const vatUsd = subtotalUsd * VAT_RATE;
+  const totalUsd = subtotalUsd + vatUsd;
+  const subtotalNpr = subtotalUsd * rate;
+  const vatNpr = vatUsd * rate;
+  const totalNpr = totalUsd * rate;
 
   const prevent = (e: Event) => e.preventDefault();
 
@@ -65,15 +100,6 @@ export function BookingModal() {
       document.documentElement.style.overflow = "";
     };
   }, [open]);
-  const [form, setForm] = useState({
-    name: "", email: "", phone: "", checkin: "", checkout: "",
-    guests: "2", apartment: "Studio Apartment", message: "",
-  });
-  const [checkinDate, setCheckinDate] = useState<Date>();
-  const [checkoutDate, setCheckoutDate] = useState<Date>();
-  const [submitting, setSubmitting] = useState(false);
-
-  const selected = ALL_OPTIONS.find((o) => o.name === form.apartment) ?? ALL_OPTIONS[0];
 
   function update<K extends keyof typeof form>(k: K, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
@@ -124,20 +150,26 @@ export function BookingModal() {
     }
   }
 
+  const showBill = nights > 0;
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="flex max-h-[90vh] max-w-5xl flex-col border-gold/30 p-0 overscroll-contain">
+      <DialogContent className="flex max-h-[92vh] max-w-5xl flex-col border-gold/30 p-0 overscroll-contain">
         <div className="grid shrink-0 grid-cols-1 md:grid-cols-5">
+          {/* Left: image + selected room */}
           <div className="relative aspect-[4/3] overflow-hidden md:aspect-auto md:col-span-2 md:min-h-[300px]">
             <img src={selected.img} alt={selected.name} className="absolute inset-0 size-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 text-white">
               <div className="text-[10px] uppercase tracking-[0.3em] text-gold">Selected</div>
               <div className="font-display text-xl font-medium">{selected.name}</div>
-              <div className="mt-1 text-sm text-white/80">{selected.price}<span className="ml-1 text-[10px] text-white/60">/ night</span></div>
+              <div className="mt-1 text-sm text-white/80">{fmtUsd(selected.priceUsd)}<span className="ml-1 text-[10px] text-white/60">/ night</span></div>
             </div>
           </div>
-          <div className="col-span-3 flex flex-col">
+
+          {/* Right: form + bill */}
+          <div className="col-span-3 flex flex-col overflow-hidden">
+            {/* Header */}
             <div className="border-b border-border bg-luxury-black px-6 py-5 text-white">
               <div className="mb-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-gold">
                 <span className="h-px w-6 bg-gold" />Confirm Your Booking
@@ -150,7 +182,14 @@ export function BookingModal() {
                   Fill in the details below. Our team confirms via WhatsApp within the hour.
                 </DialogDescription>
               </DialogHeader>
+              {/* Trust line */}
+              <div className="mt-3 flex items-center gap-2 rounded-lg border border-gold/20 bg-gold/10 px-3 py-2 text-[11px] text-gold">
+                <ShieldCheck className="size-4 shrink-0" />
+                <span><strong>No pre-booking cost</strong> — pay only after you visit POM&apos;s Penthouse. Cancel free anytime.</span>
+              </div>
             </div>
+
+            {/* Scrollable form + bill */}
             <div className="flex-1 overflow-y-auto p-6">
               <div className="grid gap-4 md:grid-cols-2">
                 <Field label="Full Name *">
@@ -174,52 +213,31 @@ export function BookingModal() {
                     <optgroup label="Rooms">
                       {ROOMS.map((r) => <option key={r.name}>{r.name}</option>)}
                     </optgroup>
-                    {!ALL_OPTIONS.some((x) => x.name === form.apartment) && (
-                      <option value={form.apartment}>{form.apartment}</option>
-                    )}
                   </select>
                 </Field>
                 <Field label="Check-in *">
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn("h-10 w-full justify-start text-left font-normal", !checkinDate && "text-muted-foreground")}
-                      >
+                      <Button variant="outline" className={cn("h-10 w-full justify-start text-left font-normal", !checkinDate && "text-muted-foreground")}>
                         <CalendarIcon className="mr-2 size-4" />
                         {checkinDate ? format(checkinDate, "MMM d, yyyy") : "Select date"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={checkinDate}
-                        onSelect={onSelectCheckin}
-                        disabled={(d) => d < new Date()}
-                        initialFocus
-                      />
+                      <Calendar mode="single" selected={checkinDate} onSelect={onSelectCheckin} disabled={(d) => d < new Date()} initialFocus />
                     </PopoverContent>
                   </Popover>
                 </Field>
                 <Field label="Check-out *">
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn("h-10 w-full justify-start text-left font-normal", !checkoutDate && "text-muted-foreground")}
-                      >
+                      <Button variant="outline" className={cn("h-10 w-full justify-start text-left font-normal", !checkoutDate && "text-muted-foreground")}>
                         <CalendarIcon className="mr-2 size-4" />
                         {checkoutDate ? format(checkoutDate, "MMM d, yyyy") : "Select date"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={checkoutDate}
-                        onSelect={onSelectCheckout}
-                        disabled={(d) => d < new Date() || (!!checkinDate && d <= checkinDate)}
-                        initialFocus
-                      />
+                      <Calendar mode="single" selected={checkoutDate} onSelect={onSelectCheckout} disabled={(d) => d < new Date() || (!!checkinDate && d <= checkinDate)} initialFocus />
                     </PopoverContent>
                   </Popover>
                 </Field>
@@ -231,14 +249,58 @@ export function BookingModal() {
                     <Textarea rows={3} value={form.message} onChange={(e) => update("message", e.target.value)} placeholder="Anything we should know?" maxLength={1000} />
                   </Field>
                 </div>
-                <div className="flex flex-col items-start gap-3 md:col-span-2 md:flex-row md:items-center md:justify-between">
-                  <p className="text-xs text-muted-foreground">
-                    Your inquiry is sent directly to our team. We reply within the hour.
+              </div>
+
+              {/* ── Bill ── */}
+              {showBill && (
+                <div className="mt-6 rounded-xl border border-border bg-background p-5">
+                  <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
+                    <Info className="size-4 text-gold" />
+                    Estimated Bill
+                  </div>
+
+                  <div className="space-y-2.5 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">{selected.name} — {fmtUsd(selected.priceUsd)} × {nights} night{nights !== 1 ? "s" : ""}</span>
+                      <span className="font-medium">{fmtUsd(subtotalUsd)}</span>
+                    </div>
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>Converted to NPR @ 1 USD = {fmtNpr(rate)}</span>
+                      <span>{fmtNpr(subtotalNpr)}</span>
+                    </div>
+                    <div className="border-t border-border" />
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">VAT (13%)</span>
+                      <span className="font-medium">{fmtUsd(vatUsd)}</span>
+                    </div>
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>VAT in NPR</span>
+                      <span>{fmtNpr(vatNpr)}</span>
+                    </div>
+                    <div className="border-t-2 border-gold/30" />
+                    <div className="flex justify-between pt-1 text-base font-semibold">
+                      <span>Total</span>
+                      <div className="text-right">
+                        <div>{fmtUsd(totalUsd)}</div>
+                        <div className="text-xs font-normal text-gold">{fmtNpr(totalNpr)}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="mt-4 rounded-lg bg-gold/10 px-3 py-2 text-[11px] text-gold">
+                    <strong>Note:</strong> NPR amount is an approximate based on today's live exchange rate. You may pay in USD or NPR. The actual rate at check-in may differ slightly.
                   </p>
-                  <Button onClick={onSubmit} disabled={submitting} className="rounded-full bg-gold px-6 py-5 text-xs font-semibold uppercase tracking-[0.25em] text-black hover:brightness-110 disabled:opacity-60">
-                    {submitting ? "Sending..." : "Confirm Booking"} <ArrowRight className="ml-2 size-4" />
-                  </Button>
                 </div>
+              )}
+
+              {/* Footer */}
+              <div className="mt-5 flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-between">
+                <p className="text-xs text-muted-foreground">
+                  No payment required now. Pay when you arrive.
+                </p>
+                <Button onClick={onSubmit} disabled={submitting || !showBill} className="rounded-full bg-gold px-6 py-5 text-xs font-semibold uppercase tracking-[0.25em] text-black hover:brightness-110 disabled:opacity-60">
+                  {submitting ? "Sending..." : "Confirm Booking"} <ArrowRight className="ml-2 size-4" />
+                </Button>
               </div>
             </div>
           </div>
