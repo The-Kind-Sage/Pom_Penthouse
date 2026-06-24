@@ -24,6 +24,11 @@ export const Route = createFileRoute("/admin")({
   beforeLoad: ({ location }) => {
     if (location.pathname === "/admin/login") return;
   },
+  head: () => ({
+    meta: [
+      { title: "Admin Panel — POM'S Penthouse" },
+    ],
+  }),
 });
 
 function AdminLayout() {
