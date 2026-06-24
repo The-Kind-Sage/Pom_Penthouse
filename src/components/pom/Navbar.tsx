@@ -126,7 +126,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={openBooking}
-            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-gold px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-luxury-black transition hover:brightness-110"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-gold px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-black transition hover:brightness-110"
           >
             Book Now <ArrowRight className="size-3.5 shrink-0" />
           </button>

@@ -69,7 +69,7 @@ export function Rooms() {
                   <button
                     type="button"
                     onClick={() => openBooking(r.name)}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-luxury-black px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gold hover:text-luxury-black"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-luxury-black px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gold hover:text-black"
                   >
                     Book Now <ArrowRight className="size-3" />
                   </button>

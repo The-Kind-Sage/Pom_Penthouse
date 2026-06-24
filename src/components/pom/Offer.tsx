@@ -27,7 +27,7 @@ export function Offer() {
             Book your luxury serviced apartment today. Our team will respond within the hour.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <button type="button" onClick={openBooking} className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-luxury-black transition hover:brightness-110">
+            <button type="button" onClick={openBooking} className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-black transition hover:brightness-110">
               Book Now <ArrowRight className="size-4" />
             </button>
             <a href="https://wa.me/9779840814142" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.25em] text-white backdrop-blur-md transition hover:bg-white hover:text-luxury-black">

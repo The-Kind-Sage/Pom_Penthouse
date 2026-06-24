@@ -46,7 +46,7 @@ export function Residence() {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img src={a.img} alt={a.name} loading="lazy" className="size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/80 via-luxury-black/10 to-transparent" />
-                <span className="absolute left-5 top-5 rounded-full bg-gold/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-luxury-black">
+                <span className="absolute left-5 top-5 rounded-full bg-gold/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-black">
                   Available
                 </span>
                 <span className="absolute right-5 top-5 flex items-baseline gap-1 rounded-full border border-white/30 bg-luxury-black/40 px-3 py-1 text-white backdrop-blur-md">
@@ -76,7 +76,7 @@ export function Residence() {
                   <button
                     type="button"
                     onClick={() => openBooking(a.name)}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-luxury-black px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gold hover:text-luxury-black"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-luxury-black px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gold hover:text-black"
                   >
                     Book Now <ArrowRight className="size-3.5" />
                   </button>

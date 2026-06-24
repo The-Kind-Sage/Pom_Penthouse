@@ -226,7 +226,7 @@ export function BookingModal() {
                   <p className="text-xs text-muted-foreground">
                     Your inquiry is sent directly to our team. We reply within the hour.
                   </p>
-                  <Button onClick={onSubmit} disabled={submitting} className="rounded-full bg-gold px-6 py-5 text-xs font-semibold uppercase tracking-[0.25em] text-luxury-black hover:brightness-110 disabled:opacity-60">
+                  <Button onClick={onSubmit} disabled={submitting} className="rounded-full bg-gold px-6 py-5 text-xs font-semibold uppercase tracking-[0.25em] text-black hover:brightness-110 disabled:opacity-60">
                     {submitting ? "Sending..." : "Confirm Booking"} <ArrowRight className="ml-2 size-4" />
                   </Button>
                 </div>
