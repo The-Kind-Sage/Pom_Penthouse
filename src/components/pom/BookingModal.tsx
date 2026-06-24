@@ -41,16 +41,19 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 export function BookingModal() {
   const [open, setOpen] = useState(false);
 
+  const prevent = (e: Event) => e.preventDefault();
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
-      const prevent = (e: Event) => e.preventDefault();
       document.addEventListener("wheel", prevent, { passive: false, capture: true });
       document.addEventListener("touchmove", prevent, { passive: false, capture: true });
+      window.dispatchEvent(new CustomEvent("poms:stop-scroll"));
       return () => {
         document.body.style.overflow = "";
-        document.removeEventListener("wheel", prevent, true);
-        document.removeEventListener("touchmove", prevent, true);
+        document.removeEventListener("wheel", prevent, { capture: true });
+        document.removeEventListener("touchmove", prevent, { capture: true });
+        window.dispatchEvent(new CustomEvent("poms:start-scroll"));
       };
     }
     document.body.style.overflow = "";

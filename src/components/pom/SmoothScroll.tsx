@@ -6,7 +6,7 @@ export function SmoothScroll() {
     if (isMobile) return;
 
     let raf = 0;
-    let lenis: { raf: (t: number) => void; destroy: () => void; scrollTo: (target: string | number) => void } | null = null;
+    let lenis: { raf: (t: number) => void; destroy: () => void; scrollTo: (target: string | number) => void; stop: () => void; start: () => void } | null = null;
     (async () => {
       const { default: Lenis } = await import("lenis");
       lenis = new Lenis({
@@ -32,11 +32,18 @@ export function SmoothScroll() {
       }
     };
 
+    const onStop = () => lenis?.stop();
+    const onStart = () => lenis?.start();
+
     document.addEventListener("click", handleClick, true);
+    document.addEventListener("poms:stop-scroll", onStop);
+    document.addEventListener("poms:start-scroll", onStart);
     return () => {
       cancelAnimationFrame(raf);
       lenis?.destroy();
       document.removeEventListener("click", handleClick, true);
+      document.removeEventListener("poms:stop-scroll", onStop);
+      document.removeEventListener("poms:start-scroll", onStart);
     };
   }, []);
   return null;
