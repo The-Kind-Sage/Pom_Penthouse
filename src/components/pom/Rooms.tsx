@@ -54,7 +54,7 @@ export function Rooms() {
                 />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/75 via-luxury-black/10 to-transparent" />
-                <span className="absolute left-4 top-4 rounded-full bg-luxury-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur-md">
+                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-black backdrop-blur-md">
                   {r.view}
                 </span>
                 <div className="absolute inset-x-4 bottom-4 text-white">
