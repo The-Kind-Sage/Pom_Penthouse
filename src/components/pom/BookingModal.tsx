@@ -91,33 +91,16 @@ export function BookingModal() {
     const body = document.body;
     if (!open) {
       html.style.overflow = "";
-      html.style.height = "";
       body.style.overflow = "";
-      body.style.height = "";
-      body.style.position = "";
-      body.style.width = "";
-      body.style.top = "";
       window.__lenis?.start();
       return;
     }
-    const scrollY = window.scrollY;
     window.__lenis?.stop();
     html.style.overflow = "hidden";
-    html.style.height = "100%";
     body.style.overflow = "hidden";
-    body.style.height = "100%";
-    body.style.position = "fixed";
-    body.style.width = "100%";
-    body.style.top = `-${scrollY}px`;
     return () => {
       html.style.overflow = "";
-      html.style.height = "";
       body.style.overflow = "";
-      body.style.height = "";
-      body.style.position = "";
-      body.style.width = "";
-      body.style.top = "";
-      window.scrollTo(0, scrollY);
       window.__lenis?.start();
     };
   }, [open]);
