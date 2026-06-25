@@ -42,13 +42,15 @@ export function Rooms() {
               className="group flex flex-col overflow-hidden border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-25px_rgba(17,17,17,0.35)]"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
+                {(r.images?.[0] || r.image) && (
                 <img 
-                  src={r.images?.[0] || r.image || ""} 
+                  src={r.images?.[0] || r.image} 
                   alt={r.name} 
                   loading="lazy" 
                   decoding="async"
                   className="size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" 
                 />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/75 via-luxury-black/10 to-transparent" />
                 <span className="absolute left-4 top-4 rounded-full bg-luxury-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur-md">
                   {r.view}

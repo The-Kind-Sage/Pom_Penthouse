@@ -7,16 +7,22 @@ export const Route = createFileRoute("/api/settings")({
     handlers: {
       GET: async () => {
         try {
+          if (!process.env.MONGODB_URI) {
+            return json([]);
+          }
           const db = await getDb();
           const settings = await db.collection("settings").find().toArray();
           return json(settings.map((s: any) => ({ key: s.key, value: s.value })));
         } catch (err: any) {
-          return json({ error: err?.message }, 500);
+          return json([]);
         }
       },
 
       PATCH: async ({ request }) => {
         try {
+          if (!process.env.MONGODB_URI) {
+            return json({ error: "Database not configured" }, 500);
+          }
           const { key, value } = await request.json();
           const db = await getDb();
           await db.collection("settings").updateOne(
