@@ -27,6 +27,17 @@ export function Hero() {
     return () => clearInterval(t);
   }, [paused, slides.length]);
 
+  useEffect(() => {
+    if (slides.length < 2) return;
+    const next = (i + 1) % slides.length;
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = slides[next].src;
+    document.head.appendChild(link);
+    return () => { if (link.parentNode) link.parentNode.removeChild(link); };
+  }, [i, slides]);
+
   return (
     <section
       id="top"
@@ -46,7 +57,10 @@ export function Hero() {
           <img
             src={s.src}
             alt={s.alt}
+            width={1920}
+            height={1080}
             loading={idx === 0 ? "eager" : "lazy"}
+            {...(idx === 0 ? { fetchpriority: "high" } : {})}
             decoding="async"
             className="object-cover w-full h-full"
           />
