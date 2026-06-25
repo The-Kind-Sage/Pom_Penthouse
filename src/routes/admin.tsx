@@ -6,7 +6,7 @@ import {
   ChevronLeft, ChevronRight, Bell, Search, Moon, Sun, LogOut, User,
   Menu, ImageIcon, MessageSquare, BedDouble, Building,
 } from "lucide-react";
-import logoUrl from "../favicon/logo.svg?url";
+import logoUrl from "../favicon/logo.png?url";
 
 const navItems = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },

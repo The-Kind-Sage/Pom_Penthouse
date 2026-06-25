@@ -1,6 +1,6 @@
 import { Instagram, Facebook, MessageCircle, MapPin, Phone, Mail, Mountain } from "lucide-react";
 import { useSettings } from "@/lib/hooks";
-import logoUrl from "../../favicon/logo.svg?url";
+import logoUrl from "../../favicon/logo.png?url";
 
 export function Footer() {
   const { data: settings } = useSettings();
