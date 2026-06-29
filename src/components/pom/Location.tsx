@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Navigation, Clock, Plane } from "lucide-react";
+import { MapPin, Navigation, Plane } from "lucide-react";
 import { useSettings } from "@/lib/hooks";
 
 const fadeUp = { hidden: { opacity: 0, y: 32 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } };
@@ -27,12 +27,15 @@ export function Location() {
   ];
 
   return (
-    <section id="location" className="relative overflow-hidden">
+    <section id="location" className="relative overflow-hidden bg-luxury-black">
       <div className="absolute inset-0">
-        <img src="/images/gal-lake.jpg" alt="" className="size-full object-cover" />
+        <img
+          src="/images/gal-lake.jpg"
+          alt=""
+          className="size-full object-cover opacity-30"
+        />
       </div>
-      <div className="absolute inset-0 bg-luxury-black/85" />
-      <div className="absolute inset-0 bg-gradient-to-b from-luxury-black/60 via-transparent to-luxury-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-luxury-black via-luxury-black/90 to-luxury-black" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32">
         <motion.div
@@ -42,11 +45,11 @@ export function Location() {
           <motion.div variants={fadeUp} className="mb-4 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.4em] text-gold">
             <span className="h-px w-8 bg-gold" />The Location<span className="h-px w-8 bg-gold" />
           </motion.div>
-          <motion.h2 variants={fadeUp} className="font-display text-4xl font-medium leading-tight text-white sm:text-5xl [text-shadow:0_4px_40px_rgba(0,0,0,0.95)]">
+          <motion.h2 variants={fadeUp} className="font-display text-4xl font-medium leading-tight text-white sm:text-5xl">
             {title}
           </motion.h2>
           {subtitle && (
-            <motion.p variants={fadeUp} className="mt-5 text-base text-white/70 [text-shadow:0_2px_20px_rgba(0,0,0,0.9)]">{subtitle}</motion.p>
+            <motion.p variants={fadeUp} className="mt-5 text-base leading-relaxed text-white/80">{subtitle}</motion.p>
           )}
         </motion.div>
 
@@ -55,7 +58,7 @@ export function Location() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9 }}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
+              className="relative overflow-hidden rounded-2xl border border-white/10"
             >
               <div className="aspect-[4/3] sm:aspect-video lg:aspect-[4/3]">
                 <iframe
@@ -66,7 +69,7 @@ export function Location() {
                   loading="lazy"
                 />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5">
                 <div className="flex items-center gap-2 text-white">
                   <MapPin className="size-4 text-gold" />
                   <span className="text-sm font-medium">POM&apos;S Penthouse, Lakeside</span>
@@ -78,7 +81,7 @@ export function Location() {
           {nearby.length > 0 && (
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
               <motion.h3 variants={fadeUp} className="font-display text-3xl text-white sm:text-4xl">Nearby Attractions</motion.h3>
-              <motion.p variants={fadeUp} className="mt-4 max-w-lg text-white/65">
+              <motion.p variants={fadeUp} className="mt-4 max-w-lg text-white/70">
                 Step out and you&apos;re already where everyone else came to be.
               </motion.p>
               <motion.div variants={stagger} className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -87,9 +90,9 @@ export function Location() {
                   return (
                     <motion.div
                       key={n.name} variants={fadeUp}
-                      className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm transition-all duration-300 hover:border-gold/40 hover:bg-white/10"
+                      className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:border-gold/40 hover:bg-white/10"
                     >
-                      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold transition-colors group-hover:bg-gold/25">
+                      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
                         <Icon className="size-4" />
                       </div>
                       <div className="min-w-0 flex-1">
