@@ -251,6 +251,18 @@
   0% { opacity: 0; transform: translateX(40px); }
   100% { opacity: 1; transform: translateX(0); }
 }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,108,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(201,168,108,0); }
+}
 .toast-slide-in { animation: toast-slide-in 0.35s ease-out; }
 
 .kenburns { animation: kenburns 25s infinite alternate ease-in-out; }
