@@ -81,8 +81,8 @@ export function Footer() {
           <motion.h4 variants={fadeUp} className="font-display text-sm uppercase tracking-[0.3em] text-gold">Contact</motion.h4>
           <motion.ul variants={stagger} className="mt-5 space-y-4 text-sm">
             {contact.address && <motion.li variants={fadeUp} className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0 text-gold" /> {contact.address}</motion.li>}
-            {contact.phone && <motion.li variants={fadeUp} className="flex gap-3"><Phone className="mt-0.5 size-4 shrink-0 text-gold" /> {contact.phone}</motion.li>}
-            {contact.email && <motion.li variants={fadeUp} className="flex gap-3"><Mail className="mt-0.5 size-4 shrink-0 text-gold" /> {contact.email}</motion.li>}
+            {contact.phone && <motion.li variants={fadeUp} className="flex gap-3"><Phone className="mt-0.5 size-4 shrink-0 text-gold" /> <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="transition-colors hover:text-gold">{contact.phone}</a></motion.li>}
+            {contact.email && <motion.li variants={fadeUp} className="flex gap-3"><Mail className="mt-0.5 size-4 shrink-0 text-gold" /> <a href={`mailto:${contact.email}`} className="transition-colors hover:text-gold">{contact.email}</a></motion.li>}
             {contact.tagline && <motion.li variants={fadeUp} className="flex gap-3"><Mountain className="mt-0.5 size-4 shrink-0 text-gold" /> {contact.tagline}</motion.li>}
           </motion.ul>
         </motion.div>
