@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Phone, ArrowRight, Moon, Sun } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useSettings } from "@/lib/hooks";
@@ -70,11 +70,22 @@ export function Navbar({ transparent = true }: { transparent?: boolean }) {
 
   const [scrolled, setScrolled] = useState(false);
   const solid = scrolled || !transparent;
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      if (y < 10) {
+        setHidden(false);
+      } else if (y > lastScrollY.current && y > 100) {
+        setHidden(true);
+      } else if (y < lastScrollY.current) {
+        setHidden(false);
+      }
+      lastScrollY.current = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -86,6 +97,8 @@ export function Navbar({ transparent = true }: { transparent?: boolean }) {
     document.documentElement.setAttribute("data-theme", next);
   }, []);
 
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
   const toggleTheme = () => {
     const next = theme === "light" ? "dark" : "light";
     setTheme(next);
@@ -96,6 +109,8 @@ export function Navbar({ transparent = true }: { transparent?: boolean }) {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      } ${
         solid
           ? "bg-background/85 backdrop-blur-xl border-b border-border shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]"
           : "bg-transparent"
