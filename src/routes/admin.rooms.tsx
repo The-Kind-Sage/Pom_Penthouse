@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useRoomTypes, useCreateRoomType, useDeleteRoomType } from "@/lib/hooks";
 import { toast } from "sonner";
-import { Plus, Trash2, X, BedDouble, Copy } from "lucide-react";
+import { Plus, Trash2, X, BedDouble } from "lucide-react";
 
 export const Route = createFileRoute("/admin/rooms")({
   component: RoomsPage,
@@ -24,27 +24,14 @@ function RoomsPage() {
 
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState<RoomForm>(EMPTY_FORM);
-  const [bulkMode, setBulkMode] = useState(false);
-  const [form2, setForm2] = useState<RoomForm>(EMPTY_FORM);
 
   const resetForm = () => {
     setForm(EMPTY_FORM);
-    setForm2(EMPTY_FORM);
     setShowForm(false);
-    setBulkMode(false);
   };
 
   const openCreate = () => {
     setForm(EMPTY_FORM);
-    setForm2(EMPTY_FORM);
-    setBulkMode(false);
-    setShowForm(true);
-  };
-
-  const openBulkCreate = () => {
-    setForm(EMPTY_FORM);
-    setForm2(EMPTY_FORM);
-    setBulkMode(true);
     setShowForm(true);
   };
 
@@ -59,21 +46,6 @@ function RoomsPage() {
     }
   };
 
-  const handleBulkSave = async () => {
-    if (!form.name.trim()) return toast.error("First room name is required");
-    if (!form2.name.trim()) return toast.error("Second room name is required");
-    try {
-      await Promise.all([
-        createType.mutateAsync(form),
-        createType.mutateAsync(form2),
-      ]);
-      toast.success("2 room types added");
-      resetForm();
-    } catch {
-      toast.error("Failed to save rooms");
-    }
-  };
-
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`Delete "${name}"?`)) return;
     try {
@@ -84,36 +56,6 @@ function RoomsPage() {
     }
   };
 
-  const RoomFormCard = ({ f, setF, label }: { f: RoomForm; setF: (v: RoomForm) => void; label: string }) => (
-    <div className="border rounded-xl p-4 space-y-3 bg-muted/30">
-      {bulkMode && <p className="text-xs font-medium text-gold uppercase tracking-wider">{label}</p>}
-      <div>
-        <label className="text-sm font-medium mb-1 block">Name *</label>
-        <input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })}
-          placeholder="e.g. Single Bed Room"
-          className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm" />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="text-sm font-medium mb-1 block">Price/Night ($)</label>
-          <input type="number" min={0} value={f.price} onChange={(e) => setF({ ...f, price: Number(e.target.value) })}
-            className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm" />
-        </div>
-        <div>
-          <label className="text-sm font-medium mb-1 block">Max Guests</label>
-          <input type="number" min={1} max={10} value={f.max_guests} onChange={(e) => setF({ ...f, max_guests: Number(e.target.value) })}
-            className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm" />
-        </div>
-      </div>
-      <div>
-        <label className="text-sm font-medium mb-1 block">Description</label>
-        <textarea rows={2} value={f.description} onChange={(e) => setF({ ...f, description: e.target.value })}
-          placeholder="Optional description..."
-          className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm resize-none" />
-      </div>
-    </div>
-  );
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -121,38 +63,48 @@ function RoomsPage() {
           <h1 className="text-2xl font-semibold">Rooms</h1>
           <p className="text-sm text-foreground/60">Manage room types (Single Bed, Double Bed, Twin Bed)</p>
         </div>
-        <div className="flex gap-2">
-          <button onClick={openBulkCreate} className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium hover:bg-muted">
-            <Copy className="size-4" /> Add Two Rooms
-          </button>
-          <button onClick={openCreate} className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
-            <Plus className="size-4" /> Add Room Type
-          </button>
-        </div>
+        <button onClick={openCreate} className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
+          <Plus className="size-4" /> Add Room Type
+        </button>
       </div>
 
       {showForm && (
-        <div className="bg-background border rounded-xl p-6 space-y-4 max-w-2xl">
+        <div className="bg-background border rounded-xl p-6 space-y-4 max-w-xl">
           <div className="flex items-center justify-between">
-            <h3 className="font-medium">{bulkMode ? "Add Two Room Types" : "New Room Type"}</h3>
+            <h3 className="font-medium">New Room Type</h3>
             <button onClick={resetForm} className="p-1 hover:bg-muted rounded-lg"><X className="size-4" /></button>
           </div>
-
-          {bulkMode ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <RoomFormCard f={form} setF={setForm} label="Room 1" />
-              <RoomFormCard f={form2} setF={setForm2} label="Room 2" />
+          <div className="space-y-3">
+            <div>
+              <label className="text-sm font-medium mb-1 block">Name *</label>
+              <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="e.g. Single Bed Room"
+                className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm" />
             </div>
-          ) : (
-            <RoomFormCard f={form} setF={setForm} label="" />
-          )}
-
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium mb-1 block">Price/Night ($)</label>
+                <input type="number" min={0} value={form.price} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
+                  className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm" />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block">Max Guests</label>
+                <input type="number" min={1} max={10} value={form.max_guests} onChange={(e) => setForm({ ...form, max_guests: Number(e.target.value) })}
+                  className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm" />
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-1 block">Description</label>
+              <textarea rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
+                placeholder="Optional description..."
+                className="w-full rounded-xl border px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm resize-none" />
+            </div>
+          </div>
           <div className="flex gap-3">
             <button onClick={resetForm} className="px-4 py-2 text-sm border rounded-lg hover:bg-muted">Cancel</button>
-            <button onClick={bulkMode ? handleBulkSave : handleSave}
-              disabled={createType.isPending}
+            <button onClick={handleSave} disabled={createType.isPending}
               className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:opacity-90 disabled:opacity-50">
-              {bulkMode ? "Create Both" : "Create"}
+              Create
             </button>
           </div>
         </div>
