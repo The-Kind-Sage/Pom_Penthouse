@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { X, Plus } from "lucide-react";
+import { useState, useRef } from "react";
+import { Upload, X, Loader2, Plus } from "lucide-react";
+import { toast } from "sonner";
 
 type MultiImageUploadProps = {
   value: string[];
@@ -8,15 +9,62 @@ type MultiImageUploadProps = {
   maxImages?: number;
 };
 
-export function MultiImageUpload({ value, onChange, label = "Images", maxImages = 10 }: MultiImageUploadProps) {
-  const [urlInput, setUrlInput] = useState("");
+function compressImage(file: File, maxWidth = 1200, quality = 0.8): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let w = img.width;
+        let h = img.height;
+        if (w > maxWidth) {
+          h = (h * maxWidth) / w;
+          w = maxWidth;
+        }
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d")!;
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = reject;
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
-  const addUrl = () => {
-    const trimmed = urlInput.trim();
-    if (!trimmed) return;
-    if (value.length >= maxImages) return;
-    onChange([...value, trimmed]);
-    setUrlInput("");
+export function MultiImageUpload({ value, onChange, label = "Images", maxImages = 10 }: MultiImageUploadProps) {
+  const [uploading, setUploading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select an image file");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image too large (max 5MB)");
+      return;
+    }
+    if (value.length >= maxImages) {
+      toast.error(`Max ${maxImages} images allowed`);
+      return;
+    }
+    setUploading(true);
+    try {
+      const dataUrl = await compressImage(file);
+      onChange([...value, dataUrl]);
+      toast.success("Image added");
+    } catch {
+      toast.error("Failed to process image");
+    }
+    setUploading(false);
+    if (inputRef.current) inputRef.current.value = "";
   };
 
   const removeImage = (index: number) => {
@@ -40,21 +88,13 @@ export function MultiImageUpload({ value, onChange, label = "Images", maxImages 
         ))}
       </div>
       {canAddMore && (
-        <div className="flex gap-2">
-          <input
-            type="url"
-            value={urlInput}
-            onChange={(e) => setUrlInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addUrl())}
-            placeholder="Paste image URL..."
-            className="flex-1 rounded-xl border px-4 py-2 bg-transparent focus:ring-2 focus:ring-primary outline-none text-sm"
-          />
-          <button type="button" onClick={addUrl}
-            className="px-3 py-2 rounded-lg border hover:bg-muted text-sm flex items-center gap-1">
-            <Plus className="size-4" /> Add
-          </button>
-        </div>
+        <button type="button" onClick={() => inputRef.current?.click()} disabled={uploading}
+          className="w-full h-24 rounded-xl border-2 border-dashed border-border hover:border-gold/50 transition flex flex-col items-center justify-center gap-2 text-foreground/40 hover:text-foreground/70 disabled:opacity-50">
+          {uploading ? <Loader2 className="size-5 animate-spin" /> : <Plus className="size-5" />}
+          <span className="text-xs">{uploading ? "Processing..." : "Add Image"}</span>
+        </button>
       )}
+      <input ref={inputRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
     </div>
   );
 }
