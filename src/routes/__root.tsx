@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
+import { LocalBusinessJsonLd, WebsiteJsonLd } from "@/components/pom/JsonLd";
 
 import appCss from "../styles.css?url";
 import logoUrl from "../favicon/logo.png?url";
@@ -72,19 +73,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "POM'S Penthouse" },
-      { name: "description", content: "Luxury Serviced Apartments in Lakeside, Pokhara, Nepal" },
+      { title: "POM'S Penthouse — Luxury Serviced Apartments in Lakeside, Pokhara" },
+      { name: "description", content: "Premium serviced apartments in Lakeside, Pokhara. Daily, weekly and monthly stays with hotel comfort and home privacy — overlooking Phewa Lake and the Annapurnas." },
       { name: "author", content: "POM'S Penthouse" },
-      { property: "og:title", content: "POM'S Penthouse" },
-      { property: "og:description", content: "Luxury Serviced Apartments in Lakeside, Pokhara" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
+      { name: "googlebot", content: "index, follow" },
+      { name: "theme-color", content: "#C9A86C" },
+      { name: "geo.region", content: "NP-03" },
+      { name: "geo.placename", content: "Pokhara" },
+      { name: "geo.position", content: "28.2096;83.9856" },
+      { name: "ICBM", content: "28.2096, 83.9856" },
+      { property: "og:title", content: "POM'S Penthouse — Luxury Serviced Apartments in Lakeside, Pokhara" },
+      { property: "og:description", content: "Premium serviced apartments in Lakeside, Pokhara. Daily, weekly and monthly stays with hotel comfort and home privacy." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:url", content: "https://pom-penthouse.vercel.app" },
+      { property: "og:image", content: "https://pom-penthouse.vercel.app/favicon/logo.png" },
+      { property: "og:site_name", content: "POM'S Penthouse" },
+      { property: "og:locale", content: "en_US" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "POM'S Penthouse — Luxury Serviced Apartments in Lakeside, Pokhara" },
+      { name: "twitter:description", content: "Premium serviced apartments in Lakeside, Pokhara. Daily, weekly and monthly stays." },
+      { name: "twitter:image", content: "https://pom-penthouse.vercel.app/favicon/logo.png" },
+      { name: "twitter:site", content: "@poms_penthouse" },
     ],
     links: [
       { rel: "icon", type: "image/png", href: logoUrl },
       { rel: "apple-touch-icon", href: logoUrl },
       { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: "https://pom-penthouse.vercel.app" },
+      { rel: "alternate", hrefLang: "en", href: "https://pom-penthouse.vercel.app" },
+      { rel: "alternate", hrefLang: "ne", href: "https://pom-penthouse.vercel.app" },
     ],
     scripts: [
       { src: "https://widgets.sociablekit.com/google-reviews/widget.js", async: true },
@@ -103,6 +121,8 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <LocalBusinessJsonLd />
+        <WebsiteJsonLd />
         {children}
         <Toaster />
         <Scripts />
@@ -116,7 +136,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );

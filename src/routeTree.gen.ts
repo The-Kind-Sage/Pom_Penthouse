@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RoomsRouteImport } from './routes/rooms'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApartmentsRouteImport } from './routes/apartments'
@@ -45,9 +47,19 @@ import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RoomsRoute = RoomsRouteImport.update({
   id: '/rooms',
   path: '/rooms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -229,7 +241,9 @@ export interface FileRoutesByFullPath {
   '/apartments': typeof ApartmentsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/rooms': typeof RoomsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/apartments': typeof AdminApartmentsRoute
   '/admin/bookings': typeof AdminBookingsRoute
@@ -265,7 +279,9 @@ export interface FileRoutesByTo {
   '/apartments': typeof ApartmentsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/rooms': typeof RoomsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/apartments': typeof AdminApartmentsRoute
   '/admin/bookings': typeof AdminBookingsRoute
@@ -303,7 +319,9 @@ export interface FileRoutesById {
   '/apartments': typeof ApartmentsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/rooms': typeof RoomsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/apartments': typeof AdminApartmentsRoute
   '/admin/bookings': typeof AdminBookingsRoute
@@ -342,7 +360,9 @@ export interface FileRouteTypes {
     | '/apartments'
     | '/contact'
     | '/gallery'
+    | '/robots.txt'
     | '/rooms'
+    | '/sitemap.xml'
     | '/admin/analytics'
     | '/admin/apartments'
     | '/admin/bookings'
@@ -378,7 +398,9 @@ export interface FileRouteTypes {
     | '/apartments'
     | '/contact'
     | '/gallery'
+    | '/robots.txt'
     | '/rooms'
+    | '/sitemap.xml'
     | '/admin/analytics'
     | '/admin/apartments'
     | '/admin/bookings'
@@ -415,7 +437,9 @@ export interface FileRouteTypes {
     | '/apartments'
     | '/contact'
     | '/gallery'
+    | '/robots.txt'
     | '/rooms'
+    | '/sitemap.xml'
     | '/admin/analytics'
     | '/admin/apartments'
     | '/admin/bookings'
@@ -453,7 +477,9 @@ export interface RootRouteChildren {
   ApartmentsRoute: typeof ApartmentsRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
   RoomsRoute: typeof RoomsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiActivitiesRoute: typeof ApiActivitiesRoute
   ApiApartmentTypesRoute: typeof ApiApartmentTypesRoute
   ApiBookingInquiriesRoute: typeof ApiBookingInquiriesRoute
@@ -475,11 +501,25 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rooms': {
       id: '/rooms'
       path: '/rooms'
       fullPath: '/rooms'
       preLoaderRoute: typeof RoomsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -759,7 +799,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApartmentsRoute: ApartmentsRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
   RoomsRoute: RoomsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiActivitiesRoute: ApiActivitiesRoute,
   ApiApartmentTypesRoute: ApiApartmentTypesRoute,
   ApiBookingInquiriesRoute: ApiBookingInquiriesRoute,

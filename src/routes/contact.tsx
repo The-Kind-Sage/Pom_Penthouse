@@ -2,12 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageLayout } from "@/components/pom/PageLayout";
 import { ContactForm } from "@/components/pom/ContactForm";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { BreadcrumbJsonLd } from "@/components/pom/JsonLd";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — POM'S Penthouse" },
-      { name: "description", content: "Get in touch with POM'S Penthouse in Lakeside, Pokhara. Book your stay or ask a question." },
+      { title: "Contact Us — Book Your Stay | POM'S Penthouse Pokhara" },
+      { name: "description", content: "Contact POM'S Penthouse for bookings and inquiries. Located in Lakeside, Pokhara. Call +977 984-081-4142, WhatsApp us, or send an email. Our team responds within the hour." },
+      { name: "keywords", content: "contact POM'S Penthouse, book apartment Pokhara, Lakeside Pokhara booking, Pokhara accommodation contact, WhatsApp Pokhara hotel" },
+      { property: "og:title", content: "Contact Us — Book Your Stay | POM'S Penthouse Pokhara" },
+      { property: "og:description", content: "Get in touch with POM'S Penthouse in Lakeside, Pokhara. Book your luxury stay today." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://pom-penthouse.vercel.app/contact" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://pom-penthouse.vercel.app/contact" },
     ],
   }),
   component: ContactPage,
@@ -16,6 +26,7 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   return (
     <PageLayout transparent={false}>
+      <BreadcrumbJsonLd items={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]} />
       <section className="bg-background pt-32 pb-24 sm:pb-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-3xl text-center">
